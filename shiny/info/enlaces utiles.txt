@@ -1,0 +1,46 @@
+Shiny Dashboard:
+https://rstudio.github.io/shinydashboard/structure.html
+
+Mastering Shiny:
+https://mastering-shiny.org/action-tidy.html
+
+Interfaz de usuario generada dinamicamente:
+https://shiny.rstudio.com/gallery/dynamic-ui.html
+
+Iconos:
+https://rstudio.github.io/shinydashboard/appearance.html#icons
+
+debugging:
+https://shiny.rstudio.com/articles/debugging.html
+
+scoping:
+https://shiny.rstudio.com/articles/scoping.html 
+
+texto html
+https://shiny.rstudio.com/articles/tag-glossary.html 
+
+guia completa encabezado
+https://zsmith27.github.io/rmarkdown_crash-course/lesson-4-yaml-headers.html#title
+
+
+
+Canva:
+https://www.canva.com/your-projects
+
+Asistencia:
+http://asistenciarrhh.inec.gob.ec/empleados/index.php
+
+ejemplos de shiny (knitr a pdf):
+https://github.com/rstudio/shiny-examples/tree/main/016-knitr-pdf
+
+La guía definitiva de Rmarkdown:
+https://bookdown.org/yihui/rmarkdown/
+
+R Shinys hermosos:
+https://jjallaire.shinyapps.io/shiny-ggplot2-brushing/
+
+R Shiny y Markdown:
+https://beta.rstudioconnect.com/content/2671/Combining-Shiny-R-Markdown.html
+
+Instalación de tinytex:
+tinytex::install_tinytex(repository = "https://linorg.usp.br/CTAN/", version = "latest")
