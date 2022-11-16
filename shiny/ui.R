@@ -59,7 +59,7 @@ ui <- dashboardPage(skin="black",
                                                     "- Además si aciertas a la posición de clasificación de tu equipo recibes un punto extra.", br()
                                                 )
                                          ),
-                                         column(width = 6, img(src = "logo.jpg", style = "width:600px"))
+                                         column(width = 6, img(src = "logo.jpg", style = "width:360px"))
                                 )
                         ),
                         tabItem("juega", h1("Tu predicción"),

@@ -1,3 +1,5 @@
+.secrets
+*/.secrets
 .Rproj.user
 .Rhistory
 .RData

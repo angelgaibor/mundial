@@ -18,12 +18,12 @@ server <- function(input, output, session){
      
       equipos %>%
          mutate(resul_gru = case_when(Equipo %in% c(input$a1, input$b1, input$c1, input$d1,
-                                                input$e1, input$f1, input$g1, input$h1) ~ "Primero",
+                                                input$e1, input$f1, input$g1, input$h1) ~ 1,
                                       Equipo %in% c(input$a2, input$b2, input$c2, input$d2,
-                                                input$e2, input$f2, input$g2, input$h2) ~ "Segundo",
+                                                input$e2, input$f2, input$g2, input$h2) ~ 2,
                                   T ~ "")) %>% 
          filter(resul_gru != "") %>% 
-         select(Siglas, Equipo, Grupo, Resultado = resul_gru)
+         select(Siglas, Equipo, Grupo, Prediccion = resul_gru)
    )  
    
    output$ib_res_con <- renderInfoBox({

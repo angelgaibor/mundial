@@ -2,10 +2,10 @@
 rm(list=ls())
 #
 
-#
-# Run the application
+# autorizacion en google sheet
+gs4_auth(cache = ".secrets", email = "endi.dm.inec@gmail.com")
 
-#
+# Iniciar la app
 app <- shinyAppDir("./shiny/", options = list())
 
 #runApp(app)

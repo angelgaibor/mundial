@@ -1,0 +1,14 @@
+name: qatar22
+title: qatar22
+username:
+account: huzerpro
+server: shinyapps.io
+hostUrl: https://api.shinyapps.io/v1
+appId: 7638710
+bundleId: 6521233
+url: https://huzerpro.shinyapps.io/qatar22/
+when: 1668612926.58802
+lastSyncTime: 1668612926.58804
+asMultiple: FALSE
+asStatic: FALSE
+ignoredFiles: data/equipos.xlsx|info/enlaces utiles.txt|info/shiny_es.pdf
