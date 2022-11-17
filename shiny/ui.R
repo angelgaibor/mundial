@@ -26,7 +26,6 @@ ui <- dashboardPage(skin="black",
                                                  menuItem("Juega conmigo", tabName = "juega",
                                                           icon = icon("atlas"))
                                      )
-                                     
                     ),
                     
                     # cuerpo

@@ -29,7 +29,7 @@ server <- function(input, output, session){
   # contador de tiempo para el mundial
   output$tiempo <- renderValueBox({
     invalidateLater(1000, session)
-    t <- difftime(as.POSIXlt.character("2022-11-20 11:00:00 -05"), Sys.time(), units = "days")
+    t <- difftime(as.POSIXlt.character("2022-11-20 11:00:00 -00"), Sys.time(), units = "days")
     t <- as.numeric(t)
     dias <- floor(t)
     horas <- floor((t - floor(t))*24)

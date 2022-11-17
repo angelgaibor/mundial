@@ -48,5 +48,8 @@ https://debruine.github.io/shinyintro/data.html
 Escuelita de Shiny
 https://github.com/debruine/shinyintro/tree/main/inst/apps/radiotables
 
+Hadley Wickham
+https://hadley.nz/
+
 Instalación de tinytex:
 tinytex::install_tinytex(repository = "https://linorg.usp.br/CTAN/", version = "latest")
