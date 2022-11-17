@@ -77,7 +77,7 @@ server <- function(input, output, session){
   output$ib_res_con <- renderInfoBox({
     if(dim(data())[1] == 16 & input$nombre != "..." & input$liga != "..."){
       colorib = "green"
-      mensaje = "Puede descargar sus resultados"
+      mensaje = "Puede enviar sus resultados"
     }else if(input$nombre == "..."){
       colorib = "red"
       mensaje = "Ingresa tu nombre"
@@ -121,8 +121,8 @@ server <- function(input, output, session){
   
   # infobox de envío de resultados
   output$ib_env_res <- renderValueBox({
-    mensaje <- "Aún no envías tus resultados"
-    subt <- ":("
+    mensaje <- "Envía"
+    subt <- "tu pronóstico"
     colorib <- "red"
     if(v$guardado == T){
       mensaje <- v$codigo

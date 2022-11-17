@@ -12,9 +12,11 @@ library(stringi)
 # autorizacion en google sheet
 gs4_auth(cache = ".secrets", email = "endi.dm.inec@gmail.com")
 
+tags$audio(src = "audio.wav", type = "audio/wav", autoplay = NA, controls = NA)
+
 ui <- dashboardPage(skin="black",
                     
-                    dashboardHeader(title = "Polla mundialista Adeptos", titleWidth = 480
+                    dashboardHeader(title = "Polla mundialista CGB - Fase de Grupos", titleWidth = 480
                     ),
                     
                     # panel lateral

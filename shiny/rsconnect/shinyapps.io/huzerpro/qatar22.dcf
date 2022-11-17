@@ -5,10 +5,10 @@ account: huzerpro
 server: shinyapps.io
 hostUrl: https://api.shinyapps.io/v1
 appId: 7638710
-bundleId: 6522370
+bundleId: 6522523
 url: https://huzerpro.shinyapps.io/qatar22/
-when: 1668632393.34439
-lastSyncTime: 1668632393.34441
+when: 1668634975.26228
+lastSyncTime: 1668634975.26231
 asMultiple: FALSE
 asStatic: FALSE
 ignoredFiles: info/enlaces utiles.txt|info/shiny_es.pdf
