@@ -12,7 +12,7 @@ library(stringi)
 # autorizacion en google sheet
 gs4_auth(cache = ".secrets", email = "endi.dm.inec@gmail.com")
 
-tags$audio(src = "audio.wav", type = "audio/wav", autoplay = NA, controls = NA)
+tags$audio(src = "Magneto_Malherido.mp3", type = "audio/mp3", autoplay = NA, controls = NA)
 
 ui <- dashboardPage(skin="black",
                     
