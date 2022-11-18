@@ -145,6 +145,44 @@ server <- function(input, output, session){
   output$lala <- renderTable(
     head(posiciones)
   )
+  
+  ######Gráfico 
+  bdd_gra_jug_pun <- reactive(
+    if(input$liga1 == "Todos contra todos"){
+      pr3 %>% 
+        mutate(Jugador = paste0(toupper(substr(Liga, 1, 3)), "\n", Jugador)) %>% 
+        arrange(desc(Puntaje), Jugador) %>% 
+        mutate(puntos1 = str_pad(Puntaje, 2, "left", "0"),
+               Jugador = factor(paste0(puntos1, Jugador), levels = paste0(puntos1, Jugador), labels = Jugador))
+    }else{
+      pr3 %>% 
+        filter(Liga == input$liga1) %>% 
+        arrange(desc(Puntaje), Jugador, Liga) %>% 
+        mutate(puntos1 = str_pad(Puntaje, 2, "left", "0"),
+               Jugador = factor(x = paste0(puntos1, Jugador, Liga), levels = paste0(puntos1, Jugador, Liga), labels = Jugador))
+    }
+  )
+  
+  output$gra_jug_pun <- renderPlot(
+    bdd_gra_jug_pun() %>% 
+      ggplot(aes(y = Jugador, x = Puntaje, fill = Jugador)) +
+      geom_col() + 
+      theme(panel.background = element_blank(),
+            panel.grid.minor = element_blank(),
+            panel.grid.major.y = element_blank(),
+            strip.background = element_rect(fill="white"),
+            axis.text = element_text(size=7),
+            axis.title = element_blank(),
+            axis.title.x = element_blank(),
+            legend.box = "vertical",
+            legend.box.spacing = unit(0.5, "cm"),
+            legend.direction = "vertical", 
+            legend.position = "none",
+            legend.text = element_text(size=7),
+            legend.title = element_text(size=8),
+            legend.title.align = 0.5,
+            panel.border = element_rect(colour = "black", fill = NA))
+  )
 }
 
 
