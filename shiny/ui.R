@@ -3,6 +3,7 @@
 
 # carga de paquetes
 library(openxlsx)
+library(rvest)
 library(shiny)
 library(shinydashboard)
 library(tidyverse)

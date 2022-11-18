@@ -1,6 +1,6 @@
 #
-library(rvest)
-
+# Web scraping
+#
 fifa = read_html("https://es.wikipedia.org/wiki/Copa_Mundial_de_F%C3%BAtbol_de_2022") %>%
   html_elements('table') %>%
   html_table()
@@ -16,8 +16,9 @@ posiciones <- do.call(rbind, lolo) %>%
   arrange(Grupo, desc(Pts), desc(Dif), desc(PG)) %>% 
   group_by(Grupo) %>% 
   mutate(Pos = row_number()) %>% 
-  select(Grupo, Pos, Equipo, Pts, PJ, PG, PE, PP, GF, GC, Dif)
+  select(Grupo, Pos, Equipo, Pts, PJ, PG, PE, PP, GF, GC, Dif) %>% 
+  ungroup()
 
-rm(fifa, dimt_t, lolo)
+rm(fifa, dim_t, lolo)
 
 
