@@ -30,8 +30,8 @@ server <- function(input, output, session){
   output$tiempo <- renderValueBox({
     invalidateLater(1000, session)
     
-    t1 <- difftime(as.POSIXlt.character("2022-11-20 11:00:00 -00"), Sys.time(), units = "days")
-    t2 <- difftime(as.POSIXlt.character("2022-12-18 10:00:00 -00"), Sys.time(), units = "days")
+    t1 <- difftime(as.POSIXlt.character("2022-11-20 11:00:00 -05"), Sys.time(), units = "days") + 5/24
+    t2 <- difftime(as.POSIXlt.character("2022-12-18 10:00:00 -05"), Sys.time(), units = "days") + 5/24
     if(as.numeric(t1)<0){
       t <- t2
       debajo <- "restantes para la final de Qatar 2022"
@@ -221,8 +221,8 @@ server <- function(input, output, session){
       need(input$liga1, "Por favor, selecciona una Liga.")
     )
     
-    if(dim(bdd_gra_jug_pun())[1]>=10){
-      li <- bdd_gra_jug_pun()[1:10, ]
+    if(dim(bdd_gra_jug_pun())[1]>10){
+      li <- bdd_gra_jug_pun()[(dim(bdd_gra_jug_pun())[1] - 9) :dim(bdd_gra_jug_pun())[1], ]
     }else{
       li <- bdd_gra_jug_pun()
     }
