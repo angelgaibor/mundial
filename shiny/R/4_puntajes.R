@@ -70,7 +70,7 @@ plot(g1)
 g2 <- pr4 %>% 
   #filter(Grupo == "A") %>% 
   ggplot(aes(x = factor(Prediccion), y = Equipo)) +
-  geom_count()
+  geom_count(aes(color = Grupo))
 plot(g2)
 
 
