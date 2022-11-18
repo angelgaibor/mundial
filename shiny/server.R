@@ -141,10 +141,67 @@ server <- function(input, output, session){
       )
   })
   
-  # output de prueba tabla
-  output$lala <- renderTable(
-    head(posiciones)
-  )
+  # output de tablas de cada grupo
+  
+  posiciones1  <- posiciones %>% 
+    left_join(equipos, by = c("Equipo", "Grupo")) %>%
+    mutate(`G-E-P` = paste0(PG,"-",PE,"-", PP),
+           GND = sum(GF, GC),
+           `G(Dif)` = paste0(GND, "(", Dif, ")")) %>% 
+    select(-Equipo) %>% 
+    rename(Equipo = Siglas) %>% 
+    select(Grupo, Pos, Equipo, Pts, PJ,`G-E-P`,  `G(Dif)`)
+    
+
+ # con  todas las categorias   
+  # agrupando las categorias
+  output$g1 <- renderTable({
+    posiciones1 %>% 
+      filter(Grupo == "A") %>% 
+      select(-Grupo)
+  })
+  
+  output$g2 <- renderTable({
+    posiciones1 %>% 
+      filter(Grupo == "B") %>% 
+      select(-Grupo)
+  })
+  
+  output$g3 <- renderTable({
+    posiciones1 %>% 
+      filter(Grupo == "C") %>% 
+      select(-Grupo)
+  })
+  
+  output$g4 <- renderTable({
+    posiciones1 %>% 
+      filter(Grupo == "D") %>% 
+      select(-Grupo)
+  })
+  
+  output$g5 <- renderTable({
+    posiciones1 %>% 
+      filter(Grupo == "E") %>% 
+      select(-Grupo)
+  })
+  
+  output$g6 <- renderTable({
+    posiciones1 %>% 
+      filter(Grupo == "F") %>% 
+      select(-Grupo)
+  })
+  
+  output$g7 <- renderTable({
+    posiciones1 %>% 
+      filter(Grupo == "G") %>% 
+      select(-Grupo)
+  })
+  
+  output$g8 <- renderTable({
+    posiciones1 %>% 
+      filter(Grupo == "H") %>% 
+      select(-Grupo)
+  })
 }
 
 
