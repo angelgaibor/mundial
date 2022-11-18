@@ -57,7 +57,7 @@ server <- function(input, output, session){
     updateSelectizeInput(session, inputId = "liga", label = 'Selecciona tu Liga:', selected = NULL,
                     choices  = unique(lista_ligas$Liga))
     
-    updateSelectizeInput(session, inputId = "liga1", label = 'Selecciona tu Liga:', selected = NULL,
+    updateSelectizeInput(session, inputId = "liga1", label = 'Selecciona tu Liga:', selected = "Todos contra todos",
                          choices  = c("Todos contra todos", unique(lista_ligas$Liga)))
   })
   # prediccion del jugador
@@ -145,6 +145,51 @@ server <- function(input, output, session){
   output$lala <- renderTable(
     head(posiciones)
   )
+  
+  # gráfico de total de votos por posición recibidos
+  pr6 <- reactive({
+    
+    pr5 <- pr4 %>% 
+      group_by(Grupo, Equipo, Prediccion) %>% 
+      summarise(np1 = n(),
+                np2 = n()) %>% 
+      ungroup() %>% 
+      mutate(np1 = ifelse(Prediccion==1, np1, 0),
+             np2 = ifelse(Prediccion==2, np2, 0),
+             pt = np1*2 + np2*1) %>% 
+      group_by(Equipo) %>% 
+      summarise(pt = sum(pt)) %>% 
+      ungroup() %>% 
+      right_join(select(posiciones, Grupo, Equipo), by = "Equipo") %>% 
+      left_join(select(equipos, Equipo, Siglas), by = "Equipo") %>% 
+      mutate(pt = ifelse(is.na(pt), 0, pt)) %>% 
+      select(Grupo, Siglas, pt) %>% 
+      arrange(desc(Grupo), pt) %>% 
+      mutate(orden = factor(paste0(Grupo, "-", pt, "-", Siglas), paste0(Grupo, "-", pt, "-", Siglas), labels = Siglas)) %>% 
+      select(Siglas, orden) %>% 
+      right_join(pr4, by = "Siglas") %>% 
+      mutate(pre = ifelse(Prediccion ==1, "1ro", "2do"))
+    
+    if(input$liga1 == "Todos contra todos" | is.null(input$liga1)){
+      pr5
+    }else {
+      pr5 %>% 
+        filter(Liga == input$liga1)
+    }
+    
+  })
+  
+  output$g2 <- renderPlot({
+    validate(
+      need(input$liga1, "Por favor, selecciona una Liga.")
+    )
+    
+    ggplot(data = pr6(), aes(x = pre, y = orden)) +
+      geom_count(aes(color = Grupo)) +
+      facet_wrap(~ Grupo, ncol = 2, nrow = 4, scales= "free") +
+      theme(axis.title = element_blank(),
+            legend.position="none")
+  })
 }
 
 

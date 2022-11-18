@@ -57,7 +57,17 @@ pr3 <- pr1 %>%
 pr4 <- pr1 %>% 
   filter(Codigo %in% pr3$Codigo) %>% 
   # seleccionamos lo que nos importa
-  select(Liga, Jugador, Codigo, Grupo, Siglas, Equipo, Prediccion)
+  select(Liga, Jugador, Codigo, Grupo, Siglas, Equipo, Prediccion) %>% 
+  # recodificar las siglas
+  mutate(Siglas = case_when(Siglas == "URY"  ~ "URU",
+                            Siglas == "PRT"  ~ "POR",
+                            Siglas == "NLD"  ~ "NED",
+                            Siglas == "HRV"  ~ "CRO",
+                            Siglas == "DNK"  ~ "DEN",
+                            Siglas == "GBR"  ~ "ENG",
+                            Siglas == "CHE"  ~ "SUI",
+                            Siglas == "DEU"  ~ "GER",
+                            T ~ Siglas))
 
 rm(po1, pr1, pr2)  
 

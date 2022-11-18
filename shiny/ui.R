@@ -191,7 +191,8 @@ ui <- dashboardPage(skin="black",
                                 selectizeInput("liga1", label = NULL, choices = "",
                                                multiple = F,
                                                options = list(placeholder = "...", 
-                                                              onInitialize = I('function() { this.setValue("");}')))
+                                                              onInitialize = I('function() { this.setValue("");}'))),
+                                box(plotOutput("g2"))
                         )
                         # # downloadButton("descarga", label = "Su resultado",
                         # #                class = "btn-block"),
