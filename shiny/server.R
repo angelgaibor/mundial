@@ -195,13 +195,13 @@ server <- function(input, output, session){
     if(input$liga1 == "Todos contra todos"){
       pr3 %>% 
         mutate(Jugador = paste0(toupper(substr(Liga, 1, 3)), "\n", Jugador)) %>% 
-        arrange(desc(Puntaje), Jugador) %>% 
+        arrange(Puntaje, Jugador) %>% 
         mutate(puntos1 = str_pad(Puntaje, 2, "left", "0"),
                Jugador = factor(paste0(puntos1, Jugador), levels = paste0(puntos1, Jugador), labels = Jugador))
     }else{
       pr3 %>% 
         filter(Liga == input$liga1) %>% 
-        arrange(desc(Puntaje), Jugador, Liga) %>% 
+        arrange(Puntaje, Jugador, Liga) %>% 
         mutate(puntos1 = str_pad(Puntaje, 2, "left", "0"),
                Jugador = factor(x = paste0(puntos1, Jugador, Liga), levels = paste0(puntos1, Jugador, Liga), labels = Jugador))
     }
@@ -242,8 +242,7 @@ server <- function(input, output, session){
     rename(Equipo = Siglas) %>% 
     select(Grupo, Pos, Equipo, Pts, PJ,`G-E-P`,  `G(Dif)`)
     
-
- # con  todas las categorias   
+  # con todas las categorias   
   # agrupando las categorias
   output$g1 <- renderTable({
     posiciones1 %>% 

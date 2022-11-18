@@ -209,8 +209,8 @@ ui <- dashboardPage(skin="black",
                                                multiple = F,
                                                options = list(placeholder = "...", 
                                                               onInitialize = I('function() { this.setValue("");}'))),
-                                box(plotOutput("gra_jug_pun")),
-                                box(plotOutput("bolitas"))
+                                box(title = "Puntaje por jugador", status = "danger", solidHeader = T, plotOutput("gra_jug_pun")),
+                                box(title = "Equipos más votados", status = "warning", solidHeader = T, plotOutput("bolitas"))
 
                                 
 
