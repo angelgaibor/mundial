@@ -18,6 +18,7 @@ posiciones <- do.call(rbind, lolo) %>%
   mutate(Pos = row_number()) %>% 
   select(Grupo, Pos, Equipo, Pts, PJ, PG, PE, PP, GF, GC, Dif)
 
-rm(fifa, dimt_t, lolo)
+rm(fifa, dim_t, lolo)
 
+print(head(posiciones))
 

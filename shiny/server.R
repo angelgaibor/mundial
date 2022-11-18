@@ -137,6 +137,11 @@ server <- function(input, output, session){
         width = 12
       )
   })
+  
+  # output de prueba tabla
+  output$lala <- renderTable(
+    head(posiciones)
+  )
 }
 
 
