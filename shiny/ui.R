@@ -25,6 +25,8 @@ ui <- dashboardPage(skin="black",
                                      sidebarMenu(menuItem("Informacion", tabName = "info", selected = T, 
                                                           icon = icon("sort-by-alphabet", lib="glyphicon")),
                                                  menuItem("Juega conmigo", tabName = "juega",
+                                                          icon = icon("atlas", lib = "glyphicon")),
+                                                 menuItem("Tablas de posiciones", tabName = "grupos",
                                                           icon = icon("atlas"))
                                      )
                     ),
@@ -36,13 +38,14 @@ ui <- dashboardPage(skin="black",
                                 fluidRow(column(width = 12, valueBoxOutput("tiempo", width = 12)),
                                          column(width = 6,
                                                 box(title = "Mundial Qatar 2022", status = "danger", solidHeader = T, width = 12,
-                                                    "Esto copiamos de wikipedia: La Copa Mundial de Fútbol de la FIFA Catar 2022 (en árabe, كأس العالم لكرة
-                                                  القدم قطر 2022) será la XXII edición de la Copa Mundial de Fútbol masculino 
-                                                  organizada por la FIFA. Se desarrollará desde el 20 de noviembre al 18 de diciembre en 
-                                                  Catar, que consiguió los derechos de organización el 2 de diciembre de 2010.",
+                                                    "Esto copiamos de wikipedia: La Copa Mundial de Fútbol de la FIFA Catar 2022
+                                                     (en árabe, كأس العالم لكرة القدم قطر 2022) será la XXII edición de la Copa Mundial de
+                                                     Fútbol masculino organizada por la FIFA. Se desarrollará desde el 20 de noviembre al
+                                                     18 de diciembre en Catar, que consiguió los derechos de organización el 2 de diciembre
+                                                    de 2010.",
                                                     br(), br(),
-                                                    strong("Nota: Esta polla mundialista es sólo para la Fase de Grupos del Mundiasl Qatar 2022. A partir de
-                                                    octavos de final se creará otra con un sistema de puntaje distinto."),
+                                                    strong("Nota: Esta polla mundialista es sólo para la Fase de Grupos del Mundiasl Qatar 2022.
+                                                    A partir de octavos de final se creará otra con un sistema de puntaje distinto."),
                                                     br(), br(),
                                                     "PD. En Ecuador no va jugar el Kitu :(",
                                                     br()),
@@ -58,15 +61,15 @@ ui <- dashboardPage(skin="black",
                                                     "- Por cada equipo clasificado a octavos de final recibes ", strong("1 punto"), ".", br(), br(),
                                                     "- Además, si aciertas a la posición de clasificación de tu equipo recibes ", strong("1 punto extra"), ".",
                                                     br(), br(),
-                                                    "- El criterio de desempate en el caso de darse se definirá por quien tenga mayor número de aciertos en la
-                                                    posición de los equipos.",
+                                                    "- El criterio de desempate en el caso de darse se definirá por quien tenga mayor número de aciertos 
+                                                    en la posición de los equipos.",
                                                     br(), br(),
                                                     strong("Notas:"),
                                                     "- La semana del 21/11/22 se incluirá una pestaña para revisar las clasificaciones.",
                                                     br(), br(),
                                                     "- Cada jugador puede tener un pronóstico diferente por liga.",
                                                     br(), br(),
-                                                    "- Para crear una liga nueva contactar a los administradores (Javi y/o Angelito).",
+                                                    "- Para crear una liga nueva contactar a los administradores (javier.ns87@gmail.com y/o angleito2112@gmail.com).",
                                                     br()
                                                     
                                                 )
@@ -79,9 +82,9 @@ ui <- dashboardPage(skin="black",
                                   column(width = 12,
                                          textInput("nombre", "Ingresa tu nombre/apodo", value = "..."),
                                          selectizeInput("liga", label = NULL, choices = "",
-                                                     multiple = F,
-                                                     options = list(placeholder = "...", 
-                                                                    onInitialize = I('function() { this.setValue("");}'))),
+                                                        multiple = F,
+                                                        options = list(placeholder = "...", 
+                                                                       onInitialize = I('function() { this.setValue("");}'))),
                                   )),
                                 #####
                                 fluidRow(
@@ -174,11 +177,16 @@ ui <- dashboardPage(skin="black",
                                                 actionButton("pronostico", "Envía tu pronóstico"),
                                                 br(), br(),
                                                 valueBoxOutput("ib_env_res", width = 12)
-                                                ),
-                                         column(width = 4, ""))
-                                # # downloadButton("descarga", label = "Su resultado",
-                                # #                class = "btn-block"),
+                                         ),
+                                         column(width = 4, "")
+                                )
+                        ),
+                        tabItem("grupos", h1("Posiciones"),
+                                box(tableOutput("lala"))
                         )
+                        # # downloadButton("descarga", label = "Su resultado",
+                        # #                class = "btn-block"),
+                        
                       )
                     )
 )
