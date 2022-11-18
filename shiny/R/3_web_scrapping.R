@@ -1,4 +1,7 @@
 #
+library(rvest)
+library(tidyverse)
+#
 # Web scraping
 #
 fifa = read_html("https://es.wikipedia.org/wiki/Copa_Mundial_de_F%C3%BAtbol_de_2022") %>%

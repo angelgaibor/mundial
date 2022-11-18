@@ -1,7 +1,7 @@
 #
 # Define server logic required to draw a histogram
 #
-source("R/global.R",local = T)
+source("R/1_global.R",local = T)
 
 # verifica si estamos usando googlesheets
 USING_GS4 <- "googlesheets4" %in% (.packages()) && gs4_has_token()
