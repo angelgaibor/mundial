@@ -56,6 +56,9 @@ server <- function(input, output, session){
   observeEvent(req(lista_ligas), {
     updateSelectizeInput(session, inputId = "liga", label = 'Selecciona tu Liga:', selected = NULL,
                     choices  = unique(lista_ligas$Liga))
+    
+    updateSelectizeInput(session, inputId = "liga1", label = 'Selecciona tu Liga:', selected = NULL,
+                         choices  = c("Todos contra todos", unique(lista_ligas$Liga)))
   })
   # prediccion del jugador
   data <- reactive(

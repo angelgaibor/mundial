@@ -27,6 +27,8 @@ ui <- dashboardPage(skin="black",
                                                  menuItem("Juega conmigo", tabName = "juega",
                                                           icon = icon("atlas", lib = "glyphicon")),
                                                  menuItem("Tablas de posiciones", tabName = "grupos",
+                                                          icon = icon("atlas")),
+                                                 menuItem("Puntaje", tabName = "puntaje",
                                                           icon = icon("atlas"))
                                      )
                     ),
@@ -183,6 +185,13 @@ ui <- dashboardPage(skin="black",
                         ),
                         tabItem("grupos", h1("Posiciones"),
                                 box(tableOutput("lala"))
+                        ),
+                        tabItem("puntaje", h1("Puntaje"),
+                                
+                                selectizeInput("liga1", label = NULL, choices = "",
+                                               multiple = F,
+                                               options = list(placeholder = "...", 
+                                                              onInitialize = I('function() { this.setValue("");}')))
                         )
                         # # downloadButton("descarga", label = "Su resultado",
                         # #                class = "btn-block"),
