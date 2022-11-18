@@ -192,7 +192,11 @@ ui <- dashboardPage(skin="black",
                                                multiple = F,
                                                options = list(placeholder = "...", 
                                                               onInitialize = I('function() { this.setValue("");}'))),
+                                box(plotOutput("gra_jug_pun")),
                                 box(plotOutput("g2"))
+
+                                
+
                         )
                         # # downloadButton("descarga", label = "Su resultado",
                         # #                class = "btn-block"),
