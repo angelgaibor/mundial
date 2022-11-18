@@ -25,11 +25,11 @@ ui <- dashboardPage(skin="black",
                                      sidebarMenu(menuItem("Informacion", tabName = "info", selected = T, 
                                                           icon = icon("sort-by-alphabet", lib="glyphicon")),
                                                  menuItem("Juega conmigo", tabName = "juega",
-                                                          icon = icon("atlas", lib = "glyphicon")),
+                                                          icon = icon("screenshot", lib = "glyphicon")),
                                                  menuItem("Tablas de posiciones", tabName = "grupos",
-                                                          icon = icon("atlas")),
+                                                          icon = icon("tasks", lib = "glyphicon")),
                                                  menuItem("Puntaje", tabName = "puntaje",
-                                                          icon = icon("atlas"))
+                                                          icon = icon("signal", lib = "glyphicon"))
                                      )
                     ),
                     
@@ -46,13 +46,13 @@ ui <- dashboardPage(skin="black",
                                                      18 de diciembre en Catar, que consiguió los derechos de organización el 2 de diciembre
                                                     de 2010.",
                                                     br(), br(),
-                                                    strong("Nota: Esta polla mundialista es sólo para la Fase de Grupos del Mundiasl Qatar 2022.
+                                                    strong("Nota: Esta polla mundialista es sólo para la Fase de Grupos del Mundial Qatar 2022.
                                                     A partir de octavos de final se creará otra con un sistema de puntaje distinto."),
                                                     br(), br(),
                                                     "PD. En Ecuador no va jugar el Kitu :(",
                                                     br()),
                                                 box(title = "Reglas del juego", status = "danger", solidHeader = T, width = 12,
-                                                    "- En la pestaña Juega conmigo, ingresa tu nombre y liga", br(), br(),
+                                                    "- En la pestaña Juega conmigo, ingresa tu nombre y liga.", br(), br(),
                                                     "- Luego, selecciona el primer y segundo equipo de cada grupo.",
                                                     br(), br(),
                                                     "- Para enviar tus resultados da click en el botón ", strong("Envía tu pronóstico"), ".",
@@ -183,7 +183,7 @@ ui <- dashboardPage(skin="black",
                                          column(width = 4, "")
                                 )
                         ),
-                        tabItem("grupos", h1("Posiciones"),
+                        tabItem("grupos", # h1("Posiciones"),
                                 fluidRow(
                                   box(title = "Grupo A", status = "primary", solidHeader = T, width = 6,
                                       tableOutput("g1"),  align = "center"),
@@ -203,14 +203,16 @@ ui <- dashboardPage(skin="black",
                                       tableOutput("g8"),  align = "center")
                                 )    
                         ),
-                        tabItem("puntaje", h1("Puntaje"),
+                        tabItem("puntaje", # h1("Puntaje"),
                                 
                                 selectizeInput("liga1", label = NULL, choices = "",
                                                multiple = F,
                                                options = list(placeholder = "...", 
                                                               onInitialize = I('function() { this.setValue("");}'))),
                                 box(title = "Puntaje por jugador", status = "danger", solidHeader = T, plotOutput("gra_jug_pun")),
-                                box(title = "Equipos más votados", status = "warning", solidHeader = T, plotOutput("bolitas"))
+                                box(title = "Equipos más votados", status = "warning", solidHeader = T, plotOutput("bolitas")),
+                                box(title = NULL, status = "warning", solidHeader = F, "Equipos más votados: mientras más grande la bolita más gente
+                                    votó por ese equipo en esa posición.")
 
                                 
 

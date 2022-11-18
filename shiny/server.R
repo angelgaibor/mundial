@@ -29,7 +29,16 @@ server <- function(input, output, session){
   # contador de tiempo para el mundial
   output$tiempo <- renderValueBox({
     invalidateLater(1000, session)
-    t <- difftime(as.POSIXlt.character("2022-11-20 11:00:00 -00"), Sys.time(), units = "days")
+    
+    t1 <- difftime(as.POSIXlt.character("2022-11-20 11:00:00 -00"), Sys.time(), units = "days")
+    t2 <- difftime(as.POSIXlt.character("2022-12-18 10:00:00 -00"), Sys.time(), units = "days")
+    if(as.numeric(t1)<0){
+      t <- t2
+      debajo <- "restantes para la final de Qatar 2022"
+    }else{
+      t <- t1
+      debajo <- "restantes para Qatar 2022"
+    }
     t <- as.numeric(t)
     dias <- floor(t)
     horas <- floor((t - floor(t))*24)
@@ -38,7 +47,7 @@ server <- function(input, output, session){
     minutos <- str_pad(minutos, 2, "left", "0")
     segundos <- str_pad(segundos, 2, "left", "0")
     mensaje <- paste0(dias, " dias ", horas, ":", minutos, ":", segundos)
-    valueBox(mensaje, "restantes para Qatar 2022", icon = icon("time", lib = "glyphicon"), color = "yellow")
+    valueBox(mensaje, debajo, icon = icon("time", lib = "glyphicon"), color = "yellow")
   })
   
   # infobox - equipos en competencia
@@ -212,7 +221,13 @@ server <- function(input, output, session){
       need(input$liga1, "Por favor, selecciona una Liga.")
     )
     
-    bdd_gra_jug_pun() %>% 
+    if(dim(bdd_gra_jug_pun())[1]>=10){
+      li <- bdd_gra_jug_pun()[1:10, ]
+    }else{
+      li <- bdd_gra_jug_pun()
+    }
+    
+    li %>% 
       ggplot(aes(y = Jugador, x = Puntaje, fill = Jugador)) +
       geom_col() + 
       theme(panel.background = element_blank(),
