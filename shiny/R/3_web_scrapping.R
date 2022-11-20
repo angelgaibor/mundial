@@ -24,5 +24,4 @@ posiciones <- do.call(rbind, lolo) %>%
 
 rm(fifa, dim_t, lolo)
 
-print(head(posiciones))
 

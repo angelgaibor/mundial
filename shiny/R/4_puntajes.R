@@ -71,18 +71,4 @@ pr4 <- pr1 %>%
 
 rm(po1, pr1, pr2)  
 
-g1 <- pr3 %>% 
-  #filter(Liga == "Adeptos al Bar Feria") %>% 
-  ggplot(aes(x = Jugador, y = Puntaje)) +
-  geom_col()
-plot(g1)
-
-g2 <- pr4 %>% 
-  #filter(Grupo == "A") %>% 
-  ggplot(aes(x = factor(Prediccion), y = Equipo)) +
-  geom_count(aes(color = Grupo))
-plot(g2)
-
-
-
 

@@ -46,7 +46,7 @@ server <- function(input, output, session){
     segundos <- floor(t*24*60*60 - (dias*24*60*60 + horas*60*60 + minutos*60))
     minutos <- str_pad(minutos, 2, "left", "0")
     segundos <- str_pad(segundos, 2, "left", "0")
-    mensaje <- paste0(dias, " dias ", horas, ":", minutos, ":", segundos)
+    mensaje <- paste0(dias, " días ", horas, ":", minutos, ":", segundos)
     valueBox(mensaje, debajo, icon = icon("time", lib = "glyphicon"), color = "yellow")
   })
   
@@ -250,12 +250,12 @@ server <- function(input, output, session){
   
   posiciones1  <- posiciones %>% 
     left_join(equipos, by = c("Equipo", "Grupo")) %>%
+    ungroup() %>% 
     mutate(`G-E-P` = paste0(PG,"-",PE,"-", PP),
-           GND = sum(GF, GC),
-           `G(Dif)` = paste0(GND, "(", Dif, ")")) %>% 
+           `GF(Dif)` = paste0(GF, "(", Dif, ")")) %>% 
     select(-Equipo) %>% 
     rename(Equipo = Siglas) %>% 
-    select(Grupo, Pos, Equipo, Pts, PJ,`G-E-P`,  `G(Dif)`)
+    select(Grupo, Pos, Equipo, Pts, PJ,`G-E-P`,  `GF(Dif)`)
     
   # con todas las categorias   
   # agrupando las categorias
