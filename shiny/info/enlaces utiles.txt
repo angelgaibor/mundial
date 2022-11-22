@@ -45,6 +45,9 @@ https://beta.rstudioconnect.com/content/2671/Combining-Shiny-R-Markdown.html
 R shiny shinyaap.io y google sheet
 https://debruine.github.io/shinyintro/data.html
 
+reescalar inputs
+https://stackoverflow.com/questions/20637248/shiny-4-small-textinput-boxes-side-by-side
+
 Escuelita de Shiny
 https://github.com/debruine/shinyintro/tree/main/inst/apps/radiotables
 

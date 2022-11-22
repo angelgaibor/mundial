@@ -13,8 +13,6 @@ library(stringi)
 # autorizacion en google sheet
 gs4_auth(cache = ".secrets", email = "endi.dm.inec@gmail.com")
 
-tags$audio(src = "Magneto_Malherido.mp3", type = "audio/mp3", autoplay = NA, controls = NA)
-
 ui <- dashboardPage(skin="black",
                     
                     dashboardHeader(title = "Polla mundialista CGB - Fase de Grupos", titleWidth = 480
@@ -29,7 +27,9 @@ ui <- dashboardPage(skin="black",
                                                  menuItem("Tablas de posiciones", tabName = "grupos",
                                                           icon = icon("tasks", lib = "glyphicon")),
                                                  menuItem("Puntaje", tabName = "puntaje",
-                                                          icon = icon("signal", lib = "glyphicon"))
+                                                          icon = icon("signal", lib = "glyphicon")),
+                                                 menuItem("Fases eliminatorias", tabName = "eliminatoria",
+                                                          icon = icon("random", lib = "glyphicon"))
                                      )
                     ),
                     
@@ -41,13 +41,13 @@ ui <- dashboardPage(skin="black",
                                          column(width = 6,
                                                 box(title = "Mundial Qatar 2022", status = "danger", solidHeader = T, width = 12,
                                                     "Esto copiamos de wikipedia: La Copa Mundial de Fútbol de la FIFA Catar 2022
-                                                     (en árabe, كأس العالم لكرة القدم قطر 2022) será la XXII edición de la Copa Mundial de
-                                                     Fútbol masculino organizada por la FIFA. Se desarrollará desde el 20 de noviembre al
-                                                     18 de diciembre en Catar, que consiguió los derechos de organización el 2 de diciembre
-                                                    de 2010.",
+                                                   (en árabe, كأس العالم لكرة القدم قطر 2022) será la XXII edición de la Copa Mundial de
+                                                   Fútbol masculino organizada por la FIFA. Se desarrollará desde el 20 de noviembre al
+                                                   18 de diciembre en Catar, que consiguió los derechos de organización el 2 de diciembre
+                                                  de 2010.",
                                                     br(), br(),
                                                     strong("Nota: Esta polla mundialista es sólo para la Fase de Grupos del Mundial Qatar 2022.
-                                                    A partir de octavos de final se creará otra con un sistema de puntaje distinto."),
+                                                  A partir de octavos de final se creará otra con un sistema de puntaje distinto."),
                                                     br(), br(),
                                                     "PD. En Ecuador no va jugar el Kitu :(",
                                                     br()),
@@ -64,7 +64,7 @@ ui <- dashboardPage(skin="black",
                                                     "- Además, si aciertas a la posición de clasificación de tu equipo recibes ", strong("1 punto extra"), ".",
                                                     br(), br(),
                                                     "- El criterio de desempate en el caso de darse se definirá por quien tenga mayor número de aciertos 
-                                                    en la posición de los equipos.",
+                                                  en la posición de los equipos.",
                                                     br(), br(),
                                                     strong("Notas:"),
                                                     "- La semana del 21/11/22 se incluirá una pestaña para revisar las clasificaciones.",
@@ -76,7 +76,7 @@ ui <- dashboardPage(skin="black",
                                                     
                                                 )
                                          ),
-                                         column(width = 6, img(src = "logo.jpg", style = "width:360px"))
+                                         column(width = 6, img(src = "logo.jpg", style = "width:336px"), align = "center")
                                 )
                         ),
                         tabItem("juega", h1("Ingresa tu predicción"),
@@ -212,14 +212,161 @@ ui <- dashboardPage(skin="black",
                                 box(title = "Puntaje por jugador", status = "danger", solidHeader = T, plotOutput("gra_jug_pun")),
                                 box(title = "Equipos más votados", status = "warning", solidHeader = T, plotOutput("bolitas")),
                                 box(title = NULL, status = "warning", solidHeader = F, "Equipos más votados: mientras más grande la bolita más gente
-                                    votó por ese equipo en esa posición.")
-
+                                  votó por ese equipo en esa posición.")
                                 
-
+                                
+                                
+                        ),
+                        tabItem("eliminatoria",
+                                tags$style(
+                                  ".container {
+                                  display: flex;
+                                  justify-content: space-around;
+                                  border-color: #666666;
+                                  background-color: #fff;
+                                  border-style: solid;
+                                  border-width: thin;
+                                  border-radius: 3px;
+                                  text-align: center;
+                                  margin: 14px;
+                                  min-height: 48px;
+                                  width: 336px;
+                                  }
+                                  .container-items {
+                                  width: 40px;
+                                  height: 34px;
+                                  margin: 7px;
+                                  text-align: center;
+                                  font-size: 18px;
+                                  vertical-align: baseline;
+                                  }
+                                  "
+                                ),
+                                column(width = 12,
+                                  valueBox(value = "       Octavos de final       ", color = "red", subtitle = NULL, width = 12),
+                                  div(
+                                    class = "container",
+                                    div(class = "container-items",
+                                        textOutput("nga1")),
+                                    div(class = "container-items",
+                                        span(textInput("go11", label = NULL, value = "", width = "36px"))),
+                                    div(class = "container-items",
+                                        span(uiOutput("po11"))),
+                                    div(class = "container-items",
+                                        span(uiOutput("po12"))),
+                                    div(class = "container-items",
+                                        span(textInput("go12", label = NULL, value = "", width = "36px"))),
+                                    div(class = "container-items",
+                                        span(textOutput("ngb2")))
+                                  ),
+                                  div(
+                                    class = "container",
+                                    div(class = "container-items",
+                                        textOutput("ngc1")),
+                                    div(class = "container-items",
+                                        span(textInput("go21", label = NULL, value = "", width = "36px"))),
+                                    div(class = "container-items",
+                                        span(uiOutput("po21"))),
+                                    div(class = "container-items",
+                                        span(uiOutput("po22"))),
+                                    div(class = "container-items",
+                                        span(textInput("go22", label = NULL, value = "", width = "36px"))),
+                                    div(class = "container-items",
+                                        span(textOutput("ngd2")))
+                                  ),
+                                  div(
+                                    class = "container",
+                                    div(class = "container-items",
+                                        textOutput("nge1")),
+                                    div(class = "container-items",
+                                        span(textInput("go31", label = NULL, value = "", width = "36px"))),
+                                    div(class = "container-items",
+                                        span(uiOutput("po31"))),
+                                    div(class = "container-items",
+                                        span(uiOutput("po32"))),
+                                    div(class = "container-items",
+                                        span(textInput("go32", label = NULL, value = "", width = "36px"))),
+                                    div(class = "container-items",
+                                        span(textOutput("ngf2")))
+                                  ),
+                                  div(
+                                    class = "container",
+                                    div(class = "container-items",
+                                        textOutput("ngg1")),
+                                    div(class = "container-items",
+                                        span(textInput("go41", label = NULL, value = "", width = "36px"))),
+                                    div(class = "container-items",
+                                        span(uiOutput("po41"))),
+                                    div(class = "container-items",
+                                        span(uiOutput("po42"))),
+                                    div(class = "container-items",
+                                        span(textInput("go42", label = NULL, value = "", width = "36px"))),
+                                    div(class = "container-items",
+                                        span(textOutput("ngh2")))
+                                  ),
+                                  div(
+                                    class = "container",
+                                    div(class = "container-items",
+                                        textOutput("nga2")),
+                                    div(class = "container-items",
+                                        span(textInput("go51", label = NULL, value = "", width = "36px"))),
+                                    div(class = "container-items",
+                                        span(uiOutput("po51"))),
+                                    div(class = "container-items",
+                                        span(uiOutput("po52"))),
+                                    div(class = "container-items",
+                                        span(textInput("go52", label = NULL, value = "", width = "36px"))),
+                                    div(class = "container-items",
+                                        span(textOutput("ngb1")))
+                                  ),
+                                  div(
+                                    class = "container",
+                                    div(class = "container-items",
+                                        textOutput("ngc2")),
+                                    div(class = "container-items",
+                                        span(textInput("go61", label = NULL, value = "", width = "36px"))),
+                                    div(class = "container-items",
+                                        span(uiOutput("po61"))),
+                                    div(class = "container-items",
+                                        span(uiOutput("po62"))),
+                                    div(class = "container-items",
+                                        span(textInput("go62", label = NULL, value = "", width = "36px"))),
+                                    div(class = "container-items",
+                                        span(textOutput("ngd1")))
+                                  ),
+                                  div(
+                                    class = "container",
+                                    div(class = "container-items",
+                                        textOutput("nge2")),
+                                    div(class = "container-items",
+                                        span(textInput("go71", label = NULL, value = "", width = "36px"))),
+                                    div(class = "container-items",
+                                        span(uiOutput("po71"))),
+                                    div(class = "container-items",
+                                        span(uiOutput("po72"))),
+                                    div(class = "container-items",
+                                        span(textInput("go72", label = NULL, value = "", width = "36px"))),
+                                    div(class = "container-items",
+                                        span(textOutput("ngf1")))
+                                  ),
+                                  div(
+                                    class = "container",
+                                    div(class = "container-items",
+                                        textOutput("ngg2")),
+                                    div(class = "container-items",
+                                        span(textInput("go81", label = NULL, value = "", width = "36px"))),
+                                    div(class = "container-items",
+                                        span(uiOutput("po81"))),
+                                    div(class = "container-items",
+                                        span(uiOutput("po82"))),
+                                    div(class = "container-items",
+                                        span(textInput("go82", label = NULL, value = "", width = "36px"))),
+                                    div(class = "container-items",
+                                        span(textOutput("ngh1")))
+                                  )
+                                
+                                  )
                         )
-                        # # downloadButton("descarga", label = "Su resultado",
-                        # #                class = "btn-block"),
-                        
                       )
                     )
 )

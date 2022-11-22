@@ -150,11 +150,6 @@ server <- function(input, output, session){
       )
   })
   
-  # output de prueba tabla
-  output$lala <- renderTable(
-    head(posiciones)
-  )
-  
   # gráfico de total de votos por posición recibidos
   pr6 <- reactive({
     
@@ -199,9 +194,9 @@ server <- function(input, output, session){
       theme(axis.title = element_blank(),
             legend.position="none")
   })
-  ######Gráfico 
-  bdd_gra_jug_pun <- reactive(
-    if(input$liga1 == "Todos contra todos"){
+  # Gráfico de barritas
+  bdd_gra_jug_pun <- reactive({
+    if(input$liga1 == "Todos contra todos"  | is.null(input$liga1)){
       pr3 %>% 
         mutate(Jugador = paste0(toupper(substr(Liga, 1, 3)), "\n", Jugador)) %>% 
         arrange(Puntaje, Jugador) %>% 
@@ -214,7 +209,7 @@ server <- function(input, output, session){
         mutate(puntos1 = str_pad(Puntaje, 2, "left", "0"),
                Jugador = factor(x = paste0(puntos1, Jugador, Liga), levels = paste0(puntos1, Jugador, Liga), labels = Jugador))
     }
-  )
+  })
   
   output$gra_jug_pun <- renderPlot({
     validate(
@@ -305,6 +300,167 @@ server <- function(input, output, session){
     posiciones1 %>% 
       filter(Grupo == "H") %>% 
       select(-Grupo)
+  })
+  
+  #Input de equipos clasificados a segunda ronda
+  output$nga1 <- renderText({
+    posiciones1$Equipo[posiciones1$Grupo == "A" & posiciones1$Pos == 1]
+    })
+  
+  output$nga2 <- renderText({
+    posiciones1$Equipo[posiciones1$Grupo == "A" & posiciones1$Pos == 2]
+  })
+  
+  output$ngb1 <- renderText({
+    posiciones1$Equipo[posiciones1$Grupo == "B" & posiciones1$Pos == 1]
+  })
+  
+  output$ngb2 <- renderText({
+    posiciones1$Equipo[posiciones1$Grupo == "B" & posiciones1$Pos == 2]
+  })
+  
+  output$ngc1 <- renderText({
+    posiciones1$Equipo[posiciones1$Grupo == "C" & posiciones1$Pos == 1]
+  })
+  
+  
+  output$ngc2 <- renderText({
+    posiciones1$Equipo[posiciones1$Grupo == "C" & posiciones1$Pos == 2]
+  })
+  
+  output$ngd1 <- renderText({
+    posiciones1$Equipo[posiciones1$Grupo == "D" & posiciones1$Pos == 1]
+  })
+  
+  output$ngd2 <- renderText({
+    posiciones1$Equipo[posiciones1$Grupo == "D" & posiciones1$Pos == 2]
+  })
+  
+  output$nge1 <- renderText({
+    posiciones1$Equipo[posiciones1$Grupo == "E" & posiciones1$Pos == 1]
+  })
+  
+  output$nge2 <- renderText({
+    posiciones1$Equipo[posiciones1$Grupo == "E" & posiciones1$Pos == 2]
+  })
+  
+  output$ngf1 <- renderText({
+    posiciones1$Equipo[posiciones1$Grupo == "F" & posiciones1$Pos == 1]
+  })
+  
+  output$ngf2 <- renderText({
+    posiciones1$Equipo[posiciones1$Grupo == "F" & posiciones1$Pos == 2]
+  })
+  
+  output$ngg1 <- renderText({
+    posiciones1$Equipo[posiciones1$Grupo == "G" & posiciones1$Pos == 1]
+  })
+  
+  output$ngg2 <- renderText({
+    posiciones1$Equipo[posiciones1$Grupo == "G" & posiciones1$Pos == 2]
+  })
+  
+  output$ngh1 <- renderText({
+    posiciones1$Equipo[posiciones1$Grupo == "H" & posiciones1$Pos == 1]
+  })
+  
+  output$ngh2 <- renderText({
+    posiciones1$Equipo[posiciones1$Grupo == "H" & posiciones1$Pos == 2]
+  })
+  
+  #Inpunt text de posibles penales
+  
+  output$po11 <- renderUI({
+    if (input$go11 != input$go12| input$go11 == "" | input$go12 == "") return(NULL) else {
+      textInput("qo11", NULL,  width = "36px")
+    }
+  })
+  
+  output$po12 <- renderUI({
+    if (input$go11 != input$go12 | input$go11 == "" | input$go12 == "") return(NULL) else {
+      textInput("qo12", NULL, width = "36px")
+    }
+  })
+  output$po21 <- renderUI({
+    if (input$go21 != input$go22| input$go21 == "" | input$go22 == "") return(NULL) else {
+      textInput("qo21", NULL,  width = "36px")
+    }
+  })
+  
+  output$po22 <- renderUI({
+    if (input$go21 != input$go22 | input$go21 == "" | input$go22 == "") return(NULL) else {
+      textInput("qo22", NULL, width = "36px")
+    }
+  })
+  output$po31 <- renderUI({
+    if (input$go31 != input$go32| input$go31 == "" | input$go32 == "") return(NULL) else {
+      textInput("qo31", NULL,  width = "36px")
+    }
+  })
+  
+  output$po32 <- renderUI({
+    if (input$go31 != input$go32 | input$go31 == "" | input$go32 == "") return(NULL) else {
+      textInput("qo32", NULL, width = "36px")
+    }
+  })
+  output$po41 <- renderUI({
+    if (input$go41 != input$go42| input$go41 == "" | input$go42 == "") return(NULL) else {
+      textInput("qo41", NULL,  width = "36px")
+    }
+  })
+  
+  output$po42 <- renderUI({
+    if (input$go41 != input$go42 | input$go41 == "" | input$go42 == "") return(NULL) else {
+      textInput("qo42", NULL, width = "36px")
+    }
+  })
+  
+  output$po51 <- renderUI({
+    if (input$go51 != input$go52| input$go51 == "" | input$go52 == "") return(NULL) else {
+      textInput("qo51", NULL,  width = "36px")
+    }
+  })
+  
+  output$po52 <- renderUI({
+    if (input$go51 != input$go52 | input$go51 == "" | input$go52 == "") return(NULL) else {
+      textInput("qo52", NULL, width = "36px")
+    }
+  })
+  
+  output$po61 <- renderUI({
+    if (input$go61 != input$go62| input$go61 == "" | input$go62 == "") return(NULL) else {
+      textInput("qo61", NULL,  width = "36px")
+    }
+  })
+  
+  output$po62 <- renderUI({
+    if (input$go61 != input$go62 | input$go61 == "" | input$go62 == "") return(NULL) else {
+      textInput("qo62", NULL, width = "36px")
+    }
+  })
+  
+  output$po71 <- renderUI({
+    if (input$go71 != input$go72| input$go71 == "" | input$go72 == "") return(NULL) else {
+      textInput("qo71", NULL,  width = "36px")
+    }
+  })
+  
+  output$po72 <- renderUI({
+    if (input$go71 != input$go72 | input$go71 == "" | input$go72 == "") return(NULL) else {
+      textInput("qo72", NULL, width = "36px")
+    }
+  })
+  
+  output$po81 <- renderUI({
+    if (input$go81 != input$go82| input$go81 == "" | input$go82 == "") return(NULL) else {
+      textInput("qo81", NULL,  width = "36px")
+    }
+  })
+  
+  output$po82 <- renderUI({
+    if (input$go81 != input$go82 | input$go81 == "" | input$go82 == "") return(NULL) else {
+      textInput("qo82", NULL, width = "36px")
+    }
   })
 }
 
