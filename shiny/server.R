@@ -323,7 +323,6 @@ server <- function(input, output, session){
     posiciones1$Equipo[posiciones1$Grupo == "C" & posiciones1$Pos == 1]
   })
   
-  
   output$ngc2 <- renderText({
     posiciones1$Equipo[posiciones1$Grupo == "C" & posiciones1$Pos == 2]
   })
@@ -460,6 +459,25 @@ server <- function(input, output, session){
   output$po82 <- renderUI({
     if (input$go81 != input$go82 | input$go81 == "" | input$go82 == "") return(NULL) else {
       textInput("qo82", NULL, width = "36px")
+    }
+  })
+  
+  #Cuartos de final
+  
+  output$ca1b2 <- renderText({
+    if(input$go11 > input$go12){
+      posiciones1$Equipo[posiciones1$Grupo == "A" & posiciones1$Pos == 1]
+    }else if(input$go12 > input$go11){
+      posiciones1$Equipo[posiciones1$Grupo == "B" & posiciones1$Pos == 2]
+    }else{
+      if(input$qo11 > input$qo12){
+        posiciones1$Equipo[posiciones1$Grupo == "A" & posiciones1$Pos == 1]
+      }else if(input$qo12 > input$qo11){
+        posiciones1$Equipo[posiciones1$Grupo == "B" & posiciones1$Pos == 2]
+      }else{
+        "Mal"
+      }
+      
     }
   })
 }
