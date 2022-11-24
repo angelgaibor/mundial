@@ -277,7 +277,7 @@ ui <- dashboardPage(skin="black",
                                        div(
                                          class = "container",
                                          div(class = "container-items",
-                                             textOutput("ngb1")),
+                                             textOutput("nge1")),
                                          div(class = "container-items",
                                              span(textInput("go31", label = NULL, value = "", width = "36px"))),
                                          div(class = "container-items",
@@ -287,12 +287,12 @@ ui <- dashboardPage(skin="black",
                                          div(class = "container-items",
                                              span(textInput("go32", label = NULL, value = "", width = "36px"))),
                                          div(class = "container-items",
-                                             span(textOutput("nga2")))
+                                             span(textOutput("ngf2")))
                                        ),
                                        div(
                                          class = "container",
                                          div(class = "container-items",
-                                             textOutput("ngd1")),
+                                             textOutput("ngg1")),
                                          div(class = "container-items",
                                              span(textInput("go41", label = NULL, value = "", width = "36px"))),
                                          div(class = "container-items",
@@ -302,12 +302,12 @@ ui <- dashboardPage(skin="black",
                                          div(class = "container-items",
                                              span(textInput("go42", label = NULL, value = "", width = "36px"))),
                                          div(class = "container-items",
-                                             span(textOutput("ngc2")))
+                                             span(textOutput("ngh2")))
                                        ),
                                        div(
                                          class = "container",
                                          div(class = "container-items",
-                                             textOutput("nge1")),
+                                             textOutput("ngb1")),
                                          div(class = "container-items",
                                              span(textInput("go51", label = NULL, value = "", width = "36px"))),
                                          div(class = "container-items",
@@ -317,12 +317,12 @@ ui <- dashboardPage(skin="black",
                                          div(class = "container-items",
                                              span(textInput("go52", label = NULL, value = "", width = "36px"))),
                                          div(class = "container-items",
-                                             span(textOutput("ngf2")))
+                                             span(textOutput("nga2")))
                                        ),
                                        div(
                                          class = "container",
                                          div(class = "container-items",
-                                             textOutput("ngg1")),
+                                             textOutput("ngd1")),
                                          div(class = "container-items",
                                              span(textInput("go61", label = NULL, value = "", width = "36px"))),
                                          div(class = "container-items",
@@ -332,7 +332,7 @@ ui <- dashboardPage(skin="black",
                                          div(class = "container-items",
                                              span(textInput("go62", label = NULL, value = "", width = "36px"))),
                                          div(class = "container-items",
-                                             span(textOutput("ngh2")))
+                                             span(textOutput("ngc2")))
                                        ),
                                        div(
                                          class = "container",
@@ -366,14 +366,7 @@ ui <- dashboardPage(skin="black",
                                        )
                                        
                                 ),
-                                column(width = 12,
-                                       valueBox(value = "Cuartos de final", color = "yellow", subtitle = NULL, width = 12),
-                                       div(
-                                         class = "container",
-                                         div(class = "container-items",
-                                             textOutput("ca1b2"))
-                                       )
-                                       )
+                              tableOutput("tabla_cuartos")
                         )
                       )
                     )

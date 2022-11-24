@@ -253,7 +253,11 @@ server <- function(input, output, session){
     select(Grupo, Pos, Equipo, Pts, PJ,`G-E-P`,  `GF(Dif)`)
     
   # con todas las categorias   
-  # agrupando las categorias
+  # 
+  
+  
+  # Tablas de posición por grupo #####
+   
   output$g1 <- renderTable({
     posiciones1 %>% 
       filter(Grupo == "A") %>% 
@@ -300,9 +304,8 @@ server <- function(input, output, session){
     posiciones1 %>% 
       filter(Grupo == "H") %>% 
       select(-Grupo)
-  })
-  
-  #Input de equipos clasificados a segunda ronda
+  }) 
+  #Input de equipos clasificados a octavos #####
   output$nga1 <- renderText({
     posiciones1$Equipo[posiciones1$Grupo == "A" & posiciones1$Pos == 1]
     })
@@ -367,7 +370,7 @@ server <- function(input, output, session){
     posiciones1$Equipo[posiciones1$Grupo == "H" & posiciones1$Pos == 2]
   })
   
-  #Inpunt text de posibles penales
+  #Inpunt text de posibles penales #####
   
   output$po11 <- renderUI({
     if (input$go11 != input$go12| input$go11 == "" | input$go12 == "") return(NULL) else {
@@ -462,24 +465,79 @@ server <- function(input, output, session){
     }
   })
   
-  #Cuartos de final
-  
-  output$ca1b2 <- renderText({
-    if(input$go11 > input$go12){
-      posiciones1$Equipo[posiciones1$Grupo == "A" & posiciones1$Pos == 1]
-    }else if(input$go12 > input$go11){
-      posiciones1$Equipo[posiciones1$Grupo == "B" & posiciones1$Pos == 2]
-    }else{
-      if(input$qo11 > input$qo12){
-        posiciones1$Equipo[posiciones1$Grupo == "A" & posiciones1$Pos == 1]
-      }else if(input$qo12 > input$qo11){
-        posiciones1$Equipo[posiciones1$Grupo == "B" & posiciones1$Pos == 2]
-      }else{
-        "Mal"
-      }
-      
-    }
+  #Cuartos de final ####
+  cuartos <- reactive({
+    req(input$go11, input$go21, input$go31, input$go41,
+        input$go51, input$go61, input$go71, input$go81,
+        input$go12, input$go22, input$go32, input$go42,
+        input$go52, input$go62, input$go72, input$go82)
+    penales1 <- rep(0, 8)
+    if(is.vector(input$qo11)){penales1[1] <- input$qo11}
+    if(is.vector(input$qo21)){penales1[2] <- input$qo21}
+    if(is.vector(input$qo31)){penales1[3] <- input$qo31}
+    if(is.vector(input$qo41)){penales1[4] <- input$qo41}
+    if(is.vector(input$qo51)){penales1[5] <- input$qo51}
+    if(is.vector(input$qo61)){penales1[6] <- input$qo61}
+    if(is.vector(input$qo71)){penales1[7] <- input$qo71}
+    if(is.vector(input$qo81)){penales1[8] <- input$qo81}
+    penales2 <- rep(0, 8)
+    if(is.vector(input$qo12)){penales2[1] <- input$qo12}
+    if(is.vector(input$qo22)){penales2[2] <- input$qo22}
+    if(is.vector(input$qo32)){penales2[3] <- input$qo32}
+    if(is.vector(input$qo42)){penales2[4] <- input$qo42}
+    if(is.vector(input$qo52)){penales2[5] <- input$qo52}
+    if(is.vector(input$qo62)){penales2[6] <- input$qo62}
+    if(is.vector(input$qo72)){penales2[7] <- input$qo72}
+    if(is.vector(input$qo82)){penales2[8] <- input$qo82}
+    cuartos1 <- data.frame(
+      primeros = c(posiciones1$Equipo[posiciones1$Grupo == "A" & posiciones1$Pos == 1],
+                   posiciones1$Equipo[posiciones1$Grupo == "C" & posiciones1$Pos == 1],
+                   posiciones1$Equipo[posiciones1$Grupo == "E" & posiciones1$Pos == 1],
+                   posiciones1$Equipo[posiciones1$Grupo == "G" & posiciones1$Pos == 1],
+                   posiciones1$Equipo[posiciones1$Grupo == "B" & posiciones1$Pos == 1],
+                   posiciones1$Equipo[posiciones1$Grupo == "D" & posiciones1$Pos == 1],
+                   posiciones1$Equipo[posiciones1$Grupo == "F" & posiciones1$Pos == 1],
+                   posiciones1$Equipo[posiciones1$Grupo == "H" & posiciones1$Pos == 1]
+      ),
+      segundos = c(posiciones1$Equipo[posiciones1$Grupo == "B" & posiciones1$Pos == 2],
+                   posiciones1$Equipo[posiciones1$Grupo == "D" & posiciones1$Pos == 2],
+                   posiciones1$Equipo[posiciones1$Grupo == "F" & posiciones1$Pos == 2],
+                   posiciones1$Equipo[posiciones1$Grupo == "H" & posiciones1$Pos == 2],
+                   posiciones1$Equipo[posiciones1$Grupo == "A" & posiciones1$Pos == 2],
+                   posiciones1$Equipo[posiciones1$Grupo == "C" & posiciones1$Pos == 2],
+                   posiciones1$Equipo[posiciones1$Grupo == "E" & posiciones1$Pos == 2],
+                   posiciones1$Equipo[posiciones1$Grupo == "G" & posiciones1$Pos == 2]
+      ),
+      g1 = c(input$go11, input$go21, input$go31, input$go41,
+             input$go51, input$go61, input$go71, input$go81),
+      g2 = c(input$go12, input$go22, input$go32, input$go42,
+             input$go52, input$go62, input$go72, input$go82),
+      p1 = penales1,
+      p2 = penales2,
+      cuartos = c(1, 1, 2, 2, 3, 3, 4, 4),
+      semis = c(1,1,1,1,2,2,2,2),
+      orden = c(1,2,3,4,1,2,3,4)
+    ) %>% 
+      mutate(clasificado = case_when(g1 > g2 ~ primeros,
+                                     g1 < g2 ~ segundos,
+                                     p1 > p2 ~ primeros,
+                                     p1 < p2 ~ segundos,
+                                     T ~ "Error en su marcador")) %>% 
+      select(semis, cuartos, clasificado) %>% 
+      group_by(cuartos) %>%
+      summarise(equipo1 = first(clasificado),
+                equipo2 = last(clasificado))
   })
-}
+  
+  output$tabla_cuartos <- renderTable({
+    cuartos()
+  })
+  ####
+  
+  
+  
+  
+  
+  }
 
 
