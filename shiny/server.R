@@ -526,12 +526,16 @@ server <- function(input, output, session){
       select(semis, cuartos, clasificado) %>% 
       group_by(cuartos) %>%
       summarise(equipo1 = first(clasificado),
-                equipo2 = last(clasificado))
+                equipo2 = last(clasificado), 
+                vs =" - ") %>% 
+      select(`Equipo C1` = equipo1, 
+             vs,
+             `Equipos C2` = equipo2)
   })
   
   output$tabla_cuartos <- renderTable({
     cuartos()
-  })
+  }) 
   ####
   
   

@@ -366,7 +366,9 @@ ui <- dashboardPage(skin="black",
                                        )
                                        
                                 ),
-                              tableOutput("tabla_cuartos")
+                                column(width = 12,
+                                       valueBox(value = "Cuartos de final", color = "yellow", subtitle = NULL, width = 12),
+                                box(width = 6, tableOutput("tabla_cuartos")))
                         )
                       )
                     )
