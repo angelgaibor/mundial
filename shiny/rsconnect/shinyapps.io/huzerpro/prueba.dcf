@@ -5,10 +5,10 @@ account: huzerpro
 server: shinyapps.io
 hostUrl: https://api.shinyapps.io/v1
 appId: 7695223
-bundleId: 6544580
+bundleId: 6552009
 url: https://huzerpro.shinyapps.io/prueba/
-when: 1669153008.83399
-lastSyncTime: 1669153008.83401
+when: 1669325772.89383
+lastSyncTime: 1669325772.89384
 asMultiple: FALSE
 asStatic: FALSE
 ignoredFiles: info/enlaces utiles.txt|info/shiny_es.pdf|www/Magneto_Malherido.mp3

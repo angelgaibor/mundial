@@ -27,9 +27,9 @@ ui <- dashboardPage(skin="black",
                                                  menuItem("Tablas de posiciones", tabName = "grupos",
                                                           icon = icon("tasks", lib = "glyphicon")),
                                                  menuItem("Puntaje", tabName = "puntaje",
-                                                          icon = icon("signal", lib = "glyphicon")),
-                                                 menuItem("Fases eliminatorias", tabName = "eliminatoria",
-                                                          icon = icon("random", lib = "glyphicon"))
+                                                          icon = icon("signal", lib = "glyphicon"))
+                                                 # menuItem("Fases eliminatorias", tabName = "eliminatoria",
+                                                 #          icon = icon("random", lib = "glyphicon"))
                                      )
                     ),
                     

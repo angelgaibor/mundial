@@ -536,19 +536,17 @@ server <- function(input, output, session){
              input$go52, input$go62, input$go72, input$go82),
       p1 = penales1,
       p2 = penales2,
-      cuartos = c(1, 1, 2, 2, 3, 3, 4, 4),
-      orden = 
-    ) 
+      cuartos = c(1, 1, 2, 2, 3, 3, 4, 4)
+    )
   })
   
   output$tabla_cuartos <- renderTable({
-    cuartos() %>% 
+    octavos() %>% 
       mutate(clasificado = case_when(g1 > g2 ~ primeros,
                                      g1 < g2 ~ segundos,
                                      p1 > p2 ~ primeros,
                                      p1 < p2 ~ segundos,
                                      T ~ "Error en su marcador")) %>% 
-      select(semis, cuartos, clasificado) %>% 
       group_by(cuartos) %>%
       summarise(equipo1 = first(clasificado),
                 equipo2 = last(clasificado), 
