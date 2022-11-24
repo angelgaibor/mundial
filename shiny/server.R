@@ -69,6 +69,19 @@ server <- function(input, output, session){
     updateSelectizeInput(session, inputId = "liga1", label = 'Selecciona tu Liga:', selected = "Todos contra todos",
                          choices  = c("Todos contra todos", unique(lista_ligas$Liga)))
   })
+  
+  observeEvent(req(pr3, input$liga1), {
+    if(input$liga1 == "Todos contra todos"){
+      pr31 <- pr3 %>% 
+        mutate(Jugador = paste0(toupper(substr(Liga, 1, 3)), " ", Jugador))
+    }else{
+      pr31 <- pr3 %>% 
+        filter(Liga == input$liga1)
+    }
+  
+    updateSelectizeInput(session, inputId = "jugador1", label = 'Selecciona al jugador:', selected = "Todos",
+                         choices  = c("Todos", unique(pr31$Jugador)))
+  })
   # prediccion del jugador
   data <- reactive(
     
@@ -175,12 +188,21 @@ server <- function(input, output, session){
       mutate(pre = ifelse(Prediccion ==1, "1ro", "2do"))
     
     if(input$liga1 == "Todos contra todos" | is.null(input$liga1)){
-      pr5
+      if(input$jugador1 == "Todos" | is.null(input$jugador1)){
+        pr5
+      }else{
+        pr5 %>% filter(Jugador == input$jugador1)
+      }
     }else {
-      pr5 %>% 
-        filter(Liga == input$liga1)
+      if(input$jugador1 == "Todos" | is.null(input$jugador1)){
+        pr5 %>% 
+          filter(Liga == input$liga1)
+      }else{
+        pr5 %>% 
+          filter(Liga == input$liga1) %>% 
+          filter(Jugador == input$jugador1)
+      }
     }
-    
   })
   
   output$bolitas <- renderPlot({
@@ -466,7 +488,7 @@ server <- function(input, output, session){
   })
   
   #Cuartos de final ####
-  cuartos <- reactive({
+  octavos <- reactive({
     req(input$go11, input$go21, input$go31, input$go41,
         input$go51, input$go61, input$go71, input$go81,
         input$go12, input$go22, input$go32, input$go42,
@@ -489,7 +511,7 @@ server <- function(input, output, session){
     if(is.vector(input$qo62)){penales2[6] <- input$qo62}
     if(is.vector(input$qo72)){penales2[7] <- input$qo72}
     if(is.vector(input$qo82)){penales2[8] <- input$qo82}
-    cuartos1 <- data.frame(
+    octavos1 <- data.frame(
       primeros = c(posiciones1$Equipo[posiciones1$Grupo == "A" & posiciones1$Pos == 1],
                    posiciones1$Equipo[posiciones1$Grupo == "C" & posiciones1$Pos == 1],
                    posiciones1$Equipo[posiciones1$Grupo == "E" & posiciones1$Pos == 1],
@@ -515,9 +537,12 @@ server <- function(input, output, session){
       p1 = penales1,
       p2 = penales2,
       cuartos = c(1, 1, 2, 2, 3, 3, 4, 4),
-      semis = c(1,1,1,1,2,2,2,2),
-      orden = c(1,2,3,4,1,2,3,4)
-    ) %>% 
+      orden = 
+    ) 
+  })
+  
+  output$tabla_cuartos <- renderTable({
+    cuartos() %>% 
       mutate(clasificado = case_when(g1 > g2 ~ primeros,
                                      g1 < g2 ~ segundos,
                                      p1 > p2 ~ primeros,
@@ -531,15 +556,21 @@ server <- function(input, output, session){
       select(`Equipo C1` = equipo1, 
              vs,
              `Equipos C2` = equipo2)
-  })
-  
-  output$tabla_cuartos <- renderTable({
-    cuartos()
   }) 
   ####
   
   
   
+  
+  
+  
+  #Puntos octavos ####
+  puntos <- posiciones1 %>% 
+    filter(Pos %in% c(1, 2)) %>% 
+    cbind(cuartos = c(1, 5, 5, 1, 2, 6, 6, 2, 3, 7, 7, 3, 4, 8, 8, 4)) %>% 
+    group_by(cuartos) %>% 
+    summarise(equipo1 = first(Equipo),
+              equipo2 = last(Equipo))
   
   
   }
