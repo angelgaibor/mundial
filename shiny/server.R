@@ -557,11 +557,6 @@ server <- function(input, output, session){
   }) 
   ####
   
-  
-  
-  
-  
-  
   #Puntos octavos ####
   puntos <- posiciones1 %>% 
     filter(Pos %in% c(1, 2)) %>% 
@@ -569,6 +564,13 @@ server <- function(input, output, session){
     group_by(cuartos) %>% 
     summarise(equipo1 = first(Equipo),
               equipo2 = last(Equipo))
+  
+  #
+  ##### Angelito
+  
+  
+  #
+  ##### Javi
   
   
   }

@@ -20,16 +20,20 @@ ui <- dashboardPage(skin="black",
                     
                     # panel lateral
                     dashboardSidebar(width = 240,
-                                     sidebarMenu(menuItem("Informacion", tabName = "info", selected = T, 
-                                                          icon = icon("sort-by-alphabet", lib="glyphicon")),
-                                                 menuItem("Juega conmigo", tabName = "juega",
-                                                          icon = icon("screenshot", lib = "glyphicon")),
-                                                 menuItem("Tablas de posiciones", tabName = "grupos",
-                                                          icon = icon("tasks", lib = "glyphicon")),
+                                     sidebarMenu(menuItem("Juega conmigo", startExpanded = T,
+                                                          icon = icon("screenshot", lib = "glyphicon"),
+                                                          menuSubItem("¿Cómo jugar?", tabName = "info", selected = T),
+                                                          menuSubItem("Fase de grupos", tabName = "juega_grupos"),
+                                                          menuSubItem("Octavos de final", tabName = "juega_octavos")
+                                                          # menuSubItem("Octavos de final", tabName = "juega_cuartos"),
+                                                          # menuSubItem("Octavos de final", tabName = "juega_semis")
+                                                          ),
+                                                 menuItem("Resultados Qatar 2022",
+                                                          icon = icon("tasks", lib = "glyphicon"),
+                                                          menuSubItem("Fase de grupos", tabName = "res_grupos"),
+                                                          menuSubItem("Fase final", tabName = "res_elim_directa")),
                                                  menuItem("Puntaje", tabName = "puntaje",
-                                                          icon = icon("signal", lib = "glyphicon")),
-                                                 menuItem("Fases eliminatorias", tabName = "eliminatoria",
-                                                          icon = icon("random", lib = "glyphicon"))
+                                                          icon = icon("signal", lib = "glyphicon"))
                                      )
                     ),
                     
@@ -79,7 +83,7 @@ ui <- dashboardPage(skin="black",
                                          column(width = 6, img(src = "logo.jpg", style = "width:336px"), align = "center")
                                 )
                         ),
-                        tabItem("juega", h1("Ingresa tu predicción"),
+                        tabItem("juega_grupos", h1("Ingresa tu predicción"),
                                 fluidRow(
                                   column(width = 12,
                                          textInput("nombre", "Ingresa tu nombre/apodo", value = "..."),
@@ -183,7 +187,7 @@ ui <- dashboardPage(skin="black",
                                          column(width = 4, "")
                                 )
                         ),
-                        tabItem("grupos", # h1("Posiciones"),
+                        tabItem("res_grupos", # h1("Posiciones"),
                                 fluidRow(
                                   box(title = "Grupo A", status = "primary", solidHeader = T, width = 6,
                                       tableOutput("g1"),  align = "center"),
@@ -221,7 +225,7 @@ ui <- dashboardPage(skin="black",
                                 
                                 
                         ),
-                        tabItem("eliminatoria",
+                        tabItem("juega_octavos",
                                 tags$style(
                                   ".container {
                                   display: flex;
@@ -368,12 +372,18 @@ ui <- dashboardPage(skin="black",
                                          div(class = "container-items",
                                              span(textOutput("ngg2")))
                                        )
-                                       
                                 ),
                                 column(width = 12,
-                                       valueBox(value = "Cuartos de final", color = "yellow", subtitle = NULL, width = 12),
+                                       valueBox(value = "Tus cuartos de final serían:", color = "yellow", subtitle = NULL, width = 12),
                                 box(width = 6, tableOutput("tabla_cuartos")))
-                        )
+                        ),
+                        #
+                        ##### Angelito
+                        
+                        
+                        #
+                        ##### Javi
+                        
                       )
                     )
 )
