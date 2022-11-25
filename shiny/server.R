@@ -572,6 +572,20 @@ server <- function(input, output, session){
   #
   ##### Javi
   
+  # Resultados octavos #####
+  
+  output$res_octavos <- renderTable({
+    res_octavos %>% 
+      ungroup() %>% 
+      mutate(`G-E-P` = paste0(PG,"-",PE,"-", PP),
+             `GF(Dif)` = paste0(GF, "(", Dif, ")")) %>% 
+      select(-Equipo) %>% 
+      rename(Equipo = Siglas) %>% 
+      select(Grupo, Pos, Equipo, Pts, PJ,`G-E-P`,  `GF(Dif)`) %>% 
+      filter(Grupo == "A") %>% 
+      select(-Grupo)
+  })
+  
   
   }
 

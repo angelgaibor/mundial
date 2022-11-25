@@ -187,7 +187,7 @@ ui <- dashboardPage(skin="black",
                                          column(width = 4, "")
                                 )
                         ),
-                        tabItem("res_grupos", # h1("Posiciones"),
+                        tabItem("res_grupos",
                                 fluidRow(
                                   box(title = "Grupo A", status = "primary", solidHeader = T, width = 6,
                                       tableOutput("g1"),  align = "center"),
@@ -206,6 +206,20 @@ ui <- dashboardPage(skin="black",
                                   box(title = "Grupo H", status = "danger", solidHeader = T, width = 6,
                                       tableOutput("g8"),  align = "center")
                                 )    
+                        ),
+                        tabItem("res_elim_directa",
+                                fluidRow(width = 12,
+                                  column(width = 3,
+                                    valueBox(value = "Octavos de final", color = "red", subtitle = NULL, width = 12),
+                                    box(title = "Grupo A", status = "primary", solidHeader = T, width = 6,
+                                        tableOutput("g1"),  align = "center")
+                                    
+                                  ),
+                                  column(width = 3,
+                                    valueBox(value = "Cuartos de final", color = "red", subtitle = NULL, width = 12),
+                                    box(title = "Grupo A", status = "primary", solidHeader = T, width = 6,
+                                        tableOutput("g1"),  align = "center")
+                                  )
                         ),
                         tabItem("puntaje", # h1("Puntaje"),
                                 
