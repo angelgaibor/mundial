@@ -279,7 +279,7 @@ ui <- dashboardPage(skin="black",
                             "
                                 ),
                                 fluidRow(width = 12,
-                                         column(width = 3, align = "center",
+                                         column(width = 12, align = "center",
                                                 valueBox(value = "Octavos de final", color = "red", subtitle = NULL, width = 12),
                                                 div(
                                                   class = "container",
@@ -406,7 +406,10 @@ ui <- dashboardPage(skin="black",
                                 fluidRow(width = 12,
                                          column(width = 12, align = "center",
                                                 valueBox(value = "Tu preducción:", color = "yellow", subtitle = NULL, width = 12),
-                                                box(width = 6, tableOutput("tabla_cuartos")))
+                                                box(width = 6, tableOutput("tabla_cuartos")),
+                                                textInput("codigo_octavos", label = "Ingresa el código de participación", value = "", width = "360px"),
+                                                infoBoxOutput("ib_cod_oct"),
+                                                actionButton("pro_oct", "Envía tu pronóstico"))
                                          )
                         )
                         #

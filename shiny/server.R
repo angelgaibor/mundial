@@ -575,6 +575,30 @@ server <- function(input, output, session){
   
   #
   ##### Angelito
+  output$ib_cod_oct <- renderInfoBox({
+    if(tolower(input$codigo_octavos) %in% tolower(pr3$Codigo)){
+      titulo = "Identificación"
+      valor = paste0("Jugador: ", pr3$Jugador[tolower(pr3$Codigo) == tolower(input$codigo_octavos)])
+      subtitulo = paste0("Liga: ", pr3$Liga[tolower(pr3$Codigo) == tolower(input$codigo_octavos)])
+      colorib = "green"
+    }else{
+      titulo = "Código"
+      valor = "incorrecto"
+      subtitulo = "contáctate con el administrador"
+      colorib = "red"
+    }
+    infoBox(titulo, valor, subtitulo, color = colorib, icon = icon("cloud-upload", lib = "glyphicon"), width = 12)
+  }) 
+  
+  observeEvent(input$pro_oct, {
+    v_o$guardado <- T
+    pre_octavos_f <- pre_octavos() %>%
+      mutate(codigo = input$codigo_octavos) %>% 
+      select(primeros, segundos,	g1,	g2,	p1,	p2,	codigo) %>% 
+      ungroup() %>% 
+      as.data.frame()
+    v_o$pre_octavos_fin <- agrega_prediccion_octavos(pre_octavos_f, T)
+  })
   
   
   #

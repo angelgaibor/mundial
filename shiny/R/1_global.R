@@ -14,7 +14,9 @@ lista_ligas <- read_sheet(li_ligas)
   
 #
 ##### Angelito
-
+gs4_deauth()
+pre_oct <- "https://docs.google.com/spreadsheets/d/1dYPW05FQ5qm78IwOggcbK9ygTEkYYFeibA8GLN2GGOA/"
+pre_octavos_ini <- read_sheet(pre_oct)
 
 #
 ##### Javi
