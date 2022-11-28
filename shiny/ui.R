@@ -210,16 +210,16 @@ ui <- dashboardPage(skin="black",
                         ),
                         tabItem("res_elim_directa",
                                 fluidRow(width = 12,
-                                         column(width = 3,
+                                         column(width = 3, align = "center",
                                                 valueBox(value = "Octavos de final", color = "red", subtitle = NULL, width = 12),
-                                                box(title = "Grupo A", status = "primary", solidHeader = T, width = 6,
-                                                    tableOutput("g1"),  align = "center")
+                                                box(title = NULL, status = "danger", solidHeader = T, width = 12,
+                                                    tableOutput("res_octavos"),  align = "center")
                                                 
                                          ),
-                                         column(width = 3,
+                                         column(width = 3, align = "center",
                                                 valueBox(value = "Cuartos de final", color = "red", subtitle = NULL, width = 12),
-                                                box(title = "Grupo A", status = "primary", solidHeader = T, width = 6,
-                                                    tableOutput("g1"),  align = "center")
+                                                box(title = NULL, status = "danger", solidHeader = T, width = 12,
+                                                    tableOutput("res_cuartos"),  align = "center")
                                          )
                                 )
                         ),
@@ -266,7 +266,7 @@ ui <- dashboardPage(skin="black",
                               }
                               "
                                 ),
-                                column(width = 12,
+                                column(width = 12, align = "center",
                                        valueBox(value = "Octavos de final", color = "red", subtitle = NULL, width = 12),
                                        div(
                                          class = "container",
@@ -389,7 +389,7 @@ ui <- dashboardPage(skin="black",
                                              span(textOutput("ngg2")))
                                        )
                                 ),
-                                column(width = 12,
+                                column(width = 12, align = "center",
                                        valueBox(value = "Tus cuartos de final serían:", color = "yellow", subtitle = NULL, width = 12),
                                        box(width = 6, tableOutput("tabla_cuartos")))
                         )

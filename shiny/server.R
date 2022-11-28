@@ -574,17 +574,18 @@ server <- function(input, output, session){
   
   # Resultados octavos #####
   
-  output$res_octavos <- renderTable({
+  output$res_octavos <- renderTable(
     res_octavos %>% 
-      ungroup() %>% 
-      mutate(`G-E-P` = paste0(PG,"-",PE,"-", PP),
-             `GF(Dif)` = paste0(GF, "(", Dif, ")")) %>% 
-      select(-Equipo) %>% 
-      rename(Equipo = Siglas) %>% 
-      select(Grupo, Pos, Equipo, Pts, PJ,`G-E-P`,  `GF(Dif)`) %>% 
-      filter(Grupo == "A") %>% 
-      select(-Grupo)
-  })
+      replace(is.na(.), 0) %>% 
+      mutate(Fecha = as.character(Fecha),
+             Hora = gsub(" hrs", "", Hora),
+             `GL (P)` = ifelse(p1 != 0, paste0(g1, " (", p1, ")"), g1),
+             `GV (P)` = ifelse(p2 != 0, paste0(g2, " (", p2, ")"), g2),
+             `vs.` = " - ",
+             Resultado = paste0(`GL (P)`, `vs.`, `GV (P)`)) %>% 
+      select(Fecha, Hora, Local = equipo1, Resultado, Visitante = equipo2),
+    align = "c"
+  )
   
   
   }

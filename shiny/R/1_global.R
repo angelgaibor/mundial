@@ -19,9 +19,9 @@ lista_ligas <- read_sheet(li_ligas)
 #
 ##### Javi
 gs4_deauth()
-res_octavos <- "https://docs.google.com/spreadsheets/d/1U_H63SWVT6K1whlKql07nXXrXu0e5mi7R5SR4UP8-NA/"
-res_octavos <- read_sheet(res_octavos)
+r_octavos <- "https://docs.google.com/spreadsheets/d/1U_H63SWVT6K1whlKql07nXXrXu0e5mi7R5SR4UP8-NA/"
+res_octavos <- read_sheet(r_octavos)
 
 gs4_deauth()
-res_cuartos <- "https://docs.google.com/spreadsheets/d/1NmwY96SztmRMw_3pHnBhgya3gXg64yS7ux8zYYfF44U/"
-res_cuartos <- read_sheet(res_cuartos)
+r_cuartos <- "https://docs.google.com/spreadsheets/d/1NmwY96SztmRMw_3pHnBhgya3gXg64yS7ux8zYYfF44U/"
+res_cuartos <- read_sheet(r_cuartos)
