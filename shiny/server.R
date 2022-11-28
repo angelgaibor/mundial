@@ -280,53 +280,61 @@ server <- function(input, output, session){
   
   # Tablas de posición por grupo #####
    
-  output$g1 <- renderTable({
+  output$g1 <- renderTable(
     posiciones1 %>% 
       filter(Grupo == "A") %>% 
-      select(-Grupo)
-  })
+      select(-Grupo),
+    align = "c"
+  )
   
-  output$g2 <- renderTable({
+  output$g2 <- renderTable(
     posiciones1 %>% 
       filter(Grupo == "B") %>% 
-      select(-Grupo)
-  })
+      select(-Grupo),
+    align = "c"
+  )
   
-  output$g3 <- renderTable({
+  output$g3 <- renderTable(
     posiciones1 %>% 
       filter(Grupo == "C") %>% 
-      select(-Grupo)
-  })
+      select(-Grupo),
+    align = "c"
+  )
   
-  output$g4 <- renderTable({
+  output$g4 <- renderTable(
     posiciones1 %>% 
       filter(Grupo == "D") %>% 
-      select(-Grupo)
-  })
+      select(-Grupo),
+    align = "c"
+  )
   
-  output$g5 <- renderTable({
+  output$g5 <- renderTable(
     posiciones1 %>% 
       filter(Grupo == "E") %>% 
-      select(-Grupo)
-  })
+      select(-Grupo),
+    align = "c"
+  )
   
-  output$g6 <- renderTable({
+  output$g6 <- renderTable(
     posiciones1 %>% 
       filter(Grupo == "F") %>% 
-      select(-Grupo)
-  })
+      select(-Grupo),
+    align = "c"
+  )
   
-  output$g7 <- renderTable({
+  output$g7 <- renderTable(
     posiciones1 %>% 
       filter(Grupo == "G") %>% 
-      select(-Grupo)
-  })
+      select(-Grupo),
+    align = "c"
+  )
   
-  output$g8 <- renderTable({
+  output$g8 <- renderTable(
     posiciones1 %>% 
       filter(Grupo == "H") %>% 
-      select(-Grupo)
-  }) 
+      select(-Grupo),
+    align = "c"
+  ) 
   #Input de equipos clasificados a octavos #####
   output$nga1 <- renderText({
     posiciones1$Equipo[posiciones1$Grupo == "A" & posiciones1$Pos == 1]
@@ -573,17 +581,32 @@ server <- function(input, output, session){
   ##### Javi
   
   # Resultados octavos #####
-  
   output$res_octavos <- renderTable(
     res_octavos %>% 
       replace(is.na(.), 0) %>% 
       mutate(Fecha = as.character(Fecha),
+             Fecha = gsub("2022", "22", Fecha),
              Hora = gsub(" hrs", "", Hora),
              `GL (P)` = ifelse(p1 != 0, paste0(g1, " (", p1, ")"), g1),
              `GV (P)` = ifelse(p2 != 0, paste0(g2, " (", p2, ")"), g2),
              `vs.` = " - ",
              Resultado = paste0(`GL (P)`, `vs.`, `GV (P)`)) %>% 
-      select(Fecha, Hora, Local = equipo1, Resultado, Visitante = equipo2),
+      select(Fecha, Hora, Local = equipo1, Resultado, Visita = equipo2),
+    align = "c"
+  )
+  
+  # Resultados cuartos #####
+    output$res_cuartos <- renderTable(
+    res_cuartos %>% 
+      replace(is.na(.), 0) %>% 
+      mutate(Fecha = as.character(Fecha),
+             Fecha = gsub("2022", "22", Fecha),
+             Hora = gsub(" hrs", "", Hora),
+             `GL (P)` = ifelse(p1 != 0, paste0(g1, " (", p1, ")"), g1),
+             `GV (P)` = ifelse(p2 != 0, paste0(g2, " (", p2, ")"), g2),
+             `vs.` = " - ",
+             Resultado = paste0(`GL (P)`, `vs.`, `GV (P)`)) %>% 
+      select(Fecha, Hora, Local = equipo1, Resultado, Visita = equipo2),
     align = "c"
   )
   
