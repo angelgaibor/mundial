@@ -27,13 +27,13 @@ ui <- dashboardPage(skin="black",
                                                           menuSubItem("Octavos de final", tabName = "juega_octavos")
                                                           # menuSubItem("Octavos de final", tabName = "juega_cuartos"),
                                                           # menuSubItem("Octavos de final", tabName = "juega_semis")
-                                                          ),
-                                                 menuItem("Resultados Qatar 2022",
-                                                          icon = icon("tasks", lib = "glyphicon"),
-                                                          menuSubItem("Fase de grupos", tabName = "res_grupos"),
-                                                          menuSubItem("Fase final", tabName = "res_elim_directa")),
-                                                 menuItem("Puntaje", tabName = "puntaje",
-                                                          icon = icon("signal", lib = "glyphicon"))
+                                     ),
+                                     menuItem("Resultados Qatar 2022",
+                                              icon = icon("tasks", lib = "glyphicon"),
+                                              menuSubItem("Fase de grupos", tabName = "res_grupos"),
+                                              menuSubItem("Fase final", tabName = "res_elim_directa")),
+                                     menuItem("Puntaje", tabName = "puntaje",
+                                              icon = icon("signal", lib = "glyphicon"))
                                      )
                     ),
                     
@@ -45,13 +45,13 @@ ui <- dashboardPage(skin="black",
                                          column(width = 6,
                                                 box(title = "Mundial Qatar 2022", status = "danger", solidHeader = T, width = 12,
                                                     "Esto copiamos de wikipedia: La Copa Mundial de Fútbol de la FIFA Catar 2022
-                                                   (en árabe, كأس العالم لكرة القدم قطر 2022) será la XXII edición de la Copa Mundial de
-                                                   Fútbol masculino organizada por la FIFA. Se desarrollará desde el 20 de noviembre al
-                                                   18 de diciembre en Catar, que consiguió los derechos de organización el 2 de diciembre
-                                                  de 2010.",
+                                               (en árabe, كأس العالم لكرة القدم قطر 2022) será la XXII edición de la Copa Mundial de
+                                               Fútbol masculino organizada por la FIFA. Se desarrollará desde el 20 de noviembre al
+                                               18 de diciembre en Catar, que consiguió los derechos de organización el 2 de diciembre
+                                              de 2010.",
                                                     br(), br(),
                                                     strong("Nota: Esta polla mundialista es sólo para la Fase de Grupos del Mundial Qatar 2022.
-                                                  A partir de octavos de final se creará otra con un sistema de puntaje distinto."),
+                                              A partir de octavos de final se creará otra con un sistema de puntaje distinto."),
                                                     br(), br(),
                                                     "PD. En Ecuador no va jugar el Kitu :(",
                                                     br()),
@@ -68,7 +68,7 @@ ui <- dashboardPage(skin="black",
                                                     "- Además, si aciertas a la posición de clasificación de tu equipo recibes ", strong("1 punto extra"), ".",
                                                     br(), br(),
                                                     "- El criterio de desempate en el caso de darse se definirá por quien tenga mayor número de aciertos 
-                                                  en la posición de los equipos.",
+                                              en la posición de los equipos.",
                                                     br(), br(),
                                                     strong("Notas:"),
                                                     "- La semana del 21/11/22 se incluirá una pestaña para revisar las clasificaciones.",
@@ -90,8 +90,9 @@ ui <- dashboardPage(skin="black",
                                          selectizeInput("liga", label = NULL, choices = "",
                                                         multiple = F,
                                                         options = list(placeholder = "...", 
-                                                                       onInitialize = I('function() { this.setValue("");}'))),
-                                  )),
+                                                                       onInitialize = I('function() { this.setValue("");}')))
+                                  )
+                                ),
                                 #####
                                 fluidRow(
                                   box(title = "Grupo A", status = "primary", solidHeader = T, width = 3,
@@ -209,17 +210,18 @@ ui <- dashboardPage(skin="black",
                         ),
                         tabItem("res_elim_directa",
                                 fluidRow(width = 12,
-                                  column(width = 3,
-                                    valueBox(value = "Octavos de final", color = "red", subtitle = NULL, width = 12),
-                                    box(title = "Grupo A", status = "primary", solidHeader = T, width = 6,
-                                        tableOutput("g1"),  align = "center")
-                                    
-                                  ),
-                                  column(width = 3,
-                                    valueBox(value = "Cuartos de final", color = "red", subtitle = NULL, width = 12),
-                                    box(title = "Grupo A", status = "primary", solidHeader = T, width = 6,
-                                        tableOutput("g1"),  align = "center")
-                                  )
+                                         column(width = 3,
+                                                valueBox(value = "Octavos de final", color = "red", subtitle = NULL, width = 12),
+                                                box(title = "Grupo A", status = "primary", solidHeader = T, width = 6,
+                                                    tableOutput("g1"),  align = "center")
+                                                
+                                         ),
+                                         column(width = 3,
+                                                valueBox(value = "Cuartos de final", color = "red", subtitle = NULL, width = 12),
+                                                box(title = "Grupo A", status = "primary", solidHeader = T, width = 6,
+                                                    tableOutput("g1"),  align = "center")
+                                         )
+                                )
                         ),
                         tabItem("puntaje", # h1("Puntaje"),
                                 
@@ -234,7 +236,7 @@ ui <- dashboardPage(skin="black",
                                                               onInitialize = I('function() { this.setValue("");}'))),
                                 box(title = "Equipos más votados", status = "warning", solidHeader = T, plotOutput("bolitas")),
                                 box(title = NULL, status = "warning", solidHeader = F, "Equipos más votados: mientras más grande la bolita más gente
-                                  votó por ese equipo en esa posición.")
+                              votó por ese equipo en esa posición.")
                                 
                                 
                                 
@@ -242,30 +244,30 @@ ui <- dashboardPage(skin="black",
                         tabItem("juega_octavos",
                                 tags$style(
                                   ".container {
-                                  display: flex;
-                                  justify-content: space-around;
-                                  border-color: #666666;
-                                  background-color: #fff;
-                                  border-style: solid;
-                                  border-width: thin;
-                                  border-radius: 3px;
-                                  text-align: center;
-                                  margin: 14px;
-                                  min-height: 48px;
-                                  width: 336px;
-                                  }
-                                  .container-items {
-                                  width: 40px;
-                                  height: 34px;
-                                  margin: 7px;
-                                  text-align: center;
-                                  font-size: 18px;
-                                  vertical-align: baseline;
-                                  }
-                                  "
+                              display: flex;
+                              justify-content: space-around;
+                              border-color: #666666;
+                              background-color: #fff;
+                              border-style: solid;
+                              border-width: thin;
+                              border-radius: 3px;
+                              text-align: center;
+                              margin: 14px;
+                              min-height: 48px;
+                              width: 336px;
+                              }
+                              .container-items {
+                              width: 40px;
+                              height: 34px;
+                              margin: 7px;
+                              text-align: center;
+                              font-size: 18px;
+                              vertical-align: baseline;
+                              }
+                              "
                                 ),
                                 column(width = 12,
-                                       valueBox(value = "       Octavos de final       ", color = "red", subtitle = NULL, width = 12),
+                                       valueBox(value = "Octavos de final", color = "red", subtitle = NULL, width = 12),
                                        div(
                                          class = "container",
                                          div(class = "container-items",
@@ -389,8 +391,8 @@ ui <- dashboardPage(skin="black",
                                 ),
                                 column(width = 12,
                                        valueBox(value = "Tus cuartos de final serían:", color = "yellow", subtitle = NULL, width = 12),
-                                box(width = 6, tableOutput("tabla_cuartos")))
-                        ),
+                                       box(width = 6, tableOutput("tabla_cuartos")))
+                        )
                         #
                         ##### Angelito
                         
@@ -402,5 +404,6 @@ ui <- dashboardPage(skin="black",
                     )
 )
 
+                    
 # incluir link a https://www.glyphicons.com/
 
