@@ -1,13 +1,4 @@
-
-# mensajes de error (debug)
-# debug_msg <- function(...) {
-#   is_local <- Sys.getenv('SHINY_PORT') == ""
-#   in_shiny <- !is.null(shiny::getDefaultReactiveDomain())
-#   txt <- toString(list(...))
-#   if (is_local) message(txt)
-#   if (in_shiny) shinyjs::runjs(sprintf("console.debug(\"%s\")", txt))
-# }
-
+#
 # agregar prediccion
 agrega_prediccion <- function(data, gs4 = TRUE) {
   
@@ -23,12 +14,18 @@ agrega_prediccion <- function(data, gs4 = TRUE) {
   sum_data
 }
 
-#
-textInputRow<-function (inputId, label, value = "") 
-{
-  div(style="display:inline-block",
-      tags$label(label, `for` = inputId), 
-      tags$input(id = inputId, type = "text", value = value, class="input-min"))
+# agregar prediccion octavos
+agrega_prediccion_octavos <- function(data_oct, gs4 = TRUE) {
+  
+  if (gs4) {
+    sheet_append(pre_oct, data_oct, "pre_oct")
+    cum_data <- read_sheet(pre_oct, "pre_oct")
+  } else {
+    old_data <- read.xlsx("data/predicciones_octavos.xlsx", "Hoja1")
+    cum_data <- bind_rows(old_data, data_oct)
+    write.xlsx(cum_data, "data/predicciones_octavos.xlsx", "Hoja1")
+  }
+  
+  cum_data
 }
-#
 

@@ -103,20 +103,24 @@ server <- function(input, output, session){
     if(dim(data())[1] == 16 & input$nombre != "..." & input$liga != "..."){
       colorib = "green"
       mensaje = "Puede enviar sus resultados"
+      iconob = icon("ok", lib = "glyphicon")
     }else if(input$nombre == "..."){
       colorib = "red"
       mensaje = "Ingresa tu nombre"
+      iconob = icon("remove", lib = "glyphicon")
     }else if(input$liga == "..."){
       colorib = "red"
       mensaje = "Selecciona una Liga"
+      iconob = icon("remove", lib = "glyphicon")
     }else{
       colorib = "red"
       mensaje = "Seleccione un equipo diferente en cada grupo"
+      iconob = icon("remove", lib = "glyphicon")
     }
     infoBox(
       HTML("Estado de tu predicción"), 
       h6(mensaje), 
-      icon = icon("cloud-upload", lib = "glyphicon"),
+      icon = iconob,
       color = colorib, 
       fill = T
     )
@@ -280,53 +284,61 @@ server <- function(input, output, session){
   
   # Tablas de posición por grupo #####
    
-  output$g1 <- renderTable({
+  output$g1 <- renderTable(
     posiciones1 %>% 
       filter(Grupo == "A") %>% 
-      select(-Grupo)
-  })
+      select(-Grupo),
+    align = "c"
+  )
   
-  output$g2 <- renderTable({
+  output$g2 <- renderTable(
     posiciones1 %>% 
       filter(Grupo == "B") %>% 
-      select(-Grupo)
-  })
+      select(-Grupo),
+    align = "c"
+  )
   
-  output$g3 <- renderTable({
+  output$g3 <- renderTable(
     posiciones1 %>% 
       filter(Grupo == "C") %>% 
-      select(-Grupo)
-  })
+      select(-Grupo),
+    align = "c"
+  )
   
-  output$g4 <- renderTable({
+  output$g4 <- renderTable(
     posiciones1 %>% 
       filter(Grupo == "D") %>% 
-      select(-Grupo)
-  })
+      select(-Grupo),
+    align = "c"
+  )
   
-  output$g5 <- renderTable({
+  output$g5 <- renderTable(
     posiciones1 %>% 
       filter(Grupo == "E") %>% 
-      select(-Grupo)
-  })
+      select(-Grupo),
+    align = "c"
+  )
   
-  output$g6 <- renderTable({
+  output$g6 <- renderTable(
     posiciones1 %>% 
       filter(Grupo == "F") %>% 
-      select(-Grupo)
-  })
+      select(-Grupo),
+    align = "c"
+  )
   
-  output$g7 <- renderTable({
+  output$g7 <- renderTable(
     posiciones1 %>% 
       filter(Grupo == "G") %>% 
-      select(-Grupo)
-  })
+      select(-Grupo),
+    align = "c"
+  )
   
-  output$g8 <- renderTable({
+  output$g8 <- renderTable(
     posiciones1 %>% 
       filter(Grupo == "H") %>% 
-      select(-Grupo)
-  }) 
+      select(-Grupo),
+    align = "c"
+  ) 
   #Input de equipos clasificados a octavos #####
   output$nga1 <- renderText({
     posiciones1$Equipo[posiciones1$Grupo == "A" & posiciones1$Pos == 1]
@@ -557,11 +569,6 @@ server <- function(input, output, session){
   }) 
   ####
   
-  
-  
-  
-  
-  
   #Puntos octavos ####
   puntos <- posiciones1 %>% 
     filter(Pos %in% c(1, 2)) %>% 
@@ -570,6 +577,122 @@ server <- function(input, output, session){
     summarise(equipo1 = first(Equipo),
               equipo2 = last(Equipo))
   
+  #
+  ##### Angelito
+  output$ib_cod_oct <- renderInfoBox({
+    if(tolower(input$codigo_octavos) %in% tolower(pr3$Codigo)){
+      titulo = "Identificación"
+      valor = paste0("Jugador: ", pr3$Jugador[tolower(pr3$Codigo) == tolower(input$codigo_octavos)])
+      subtitulo = paste0("Liga: ", pr3$Liga[tolower(pr3$Codigo) == tolower(input$codigo_octavos)])
+      colorib = "green"
+      iconob = icon("ok", lib = "glyphicon")
+    }else{
+      titulo = "Código"
+      valor = "incorrecto"
+      subtitulo = "contáctate con el administrador"
+      colorib = "red"
+      iconob = icon("remove", lib = "glyphicon")
+    }
+    infoBox(titulo, valor, subtitulo, color = colorib, icon = iconob, width = 12)
+  }) 
+  
+  observeEvent(input$pro_oct, {
+    v_o$guardado <- T
+    pre_octavos_f <- pre_octavos() %>%
+      mutate(codigo = input$codigo_octavos) %>% 
+      select(primeros, segundos,	g1,	g2,	p1,	p2,	codigo) %>% 
+      ungroup() %>% 
+      as.data.frame()
+    v_o$pre_octavos_fin <- agrega_prediccion_octavos(pre_octavos_f, T)
+  })
+  
+  
+  #
+  ##### Javi
+  
+  # Resultados octavos #####
+  output$res_octavos <- renderTable(
+    res_elim_directa %>% 
+      filter(fase == "o") %>% 
+      replace(is.na(.), 0) %>% 
+      mutate(Fecha = as.character(Fecha),
+             Fecha = gsub("2022-", "", Fecha),
+             Fecha = gsub("-", "\\/", Fecha),
+             Hora = gsub(" hrs", "", Hora),
+             `GL (P)` = ifelse(p1 != 0, paste0(g1, " (", p1, ")"), g1),
+             `GV (P)` = ifelse(p2 != 0, paste0(g2, " (", p2, ")"), g2),
+             `vs.` = " - ",
+             Resultado = paste0(`GL (P)`, `vs.`, `GV (P)`)) %>% 
+      select(Fecha, Hora, Local = equipo1, Resultado, Visita = equipo2),
+    align = "c"
+  )
+  
+  # Resultados cuartos #####
+    output$res_cuartos <- renderTable(
+      res_elim_directa %>% 
+        filter(fase == "c") %>% 
+      replace(is.na(.), 0) %>% 
+      mutate(Fecha = as.character(Fecha),
+             Fecha = gsub("2022-", "", Fecha),
+             Fecha = gsub("-", "\\/", Fecha),
+             Hora = gsub(" hrs", "", Hora),
+             `GL (P)` = ifelse(p1 != 0, paste0(g1, " (", p1, ")"), g1),
+             `GV (P)` = ifelse(p2 != 0, paste0(g2, " (", p2, ")"), g2),
+             `vs.` = " - ",
+             Resultado = paste0(`GL (P)`, `vs.`, `GV (P)`)) %>% 
+      select(Fecha, Hora, Local = equipo1, Resultado, Visita = equipo2),
+    align = "c"
+  )
+  
+  # Resultados semis #####
+  output$res_semis <- renderTable(
+    res_elim_directa %>% 
+      filter(fase == "s") %>% 
+      replace(is.na(.), 0) %>% 
+      mutate(Fecha = as.character(Fecha),
+             Fecha = gsub("2022-", "", Fecha),
+             Fecha = gsub("-", "\\/", Fecha),
+             Hora = gsub(" hrs", "", Hora),
+             `GL (P)` = ifelse(p1 != 0, paste0(g1, " (", p1, ")"), g1),
+             `GV (P)` = ifelse(p2 != 0, paste0(g2, " (", p2, ")"), g2),
+             `vs.` = " - ",
+             Resultado = paste0(`GL (P)`, `vs.`, `GV (P)`)) %>% 
+      select(Fecha, Hora, Local = equipo1, Resultado, Visita = equipo2),
+    align = "c"
+  )
+  
+  # Resultados final #####
+  output$res_tercero <- renderTable(
+    res_elim_directa %>% 
+      filter(fase == "t") %>% 
+      replace(is.na(.), 0) %>% 
+      mutate(Fecha = as.character(Fecha),
+             Fecha = gsub("2022-", "", Fecha),
+             Fecha = gsub("-", "\\/", Fecha),
+             Hora = gsub(" hrs", "", Hora),
+             `GL (P)` = ifelse(p1 != 0, paste0(g1, " (", p1, ")"), g1),
+             `GV (P)` = ifelse(p2 != 0, paste0(g2, " (", p2, ")"), g2),
+             `vs.` = " - ",
+             Resultado = paste0(`GL (P)`, `vs.`, `GV (P)`)) %>% 
+      select(Fecha, Hora, Local = equipo1, Resultado, Visita = equipo2),
+    align = "c"
+  )
+  
+  output$res_campeon <- renderTable(
+    res_elim_directa %>% 
+      filter(fase == "f") %>% 
+      replace(is.na(.), 0) %>% 
+      mutate(Fecha = as.character(Fecha),
+             Fecha = gsub("2022-", "", Fecha),
+             Fecha = gsub("-", "\\/", Fecha),
+             Hora = gsub(" hrs", "", Hora),
+             `GL (P)` = ifelse(p1 != 0, paste0(g1, " (", p1, ")"), g1),
+             `GV (P)` = ifelse(p2 != 0, paste0(g2, " (", p2, ")"), g2),
+             `vs.` = " - ",
+             Resultado = paste0(`GL (P)`, `vs.`, `GV (P)`)) %>% 
+      select(Fecha, Hora, Local = equipo1, Resultado, Visita = equipo2),
+    align = "c"
+  )
   
   }
 

@@ -12,3 +12,15 @@ li_ligas <- "https://docs.google.com/spreadsheets/d/1G9vbPS4sYwRbAcs-325NpIFgr9V
 lista_ligas <- read_sheet(li_ligas)
 
   
+#
+##### Angelito
+gs4_deauth()
+pre_oct <- "https://docs.google.com/spreadsheets/d/1dYPW05FQ5qm78IwOggcbK9ygTEkYYFeibA8GLN2GGOA/"
+pre_octavos_ini <- read_sheet(pre_oct)
+
+#
+##### Javi
+gs4_deauth()
+r_elim_directa <- "https://docs.google.com/spreadsheets/d/1U_H63SWVT6K1whlKql07nXXrXu0e5mi7R5SR4UP8-NA/"
+res_elim_directa <- read_sheet(r_elim_directa)
+
