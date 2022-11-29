@@ -103,20 +103,24 @@ server <- function(input, output, session){
     if(dim(data())[1] == 16 & input$nombre != "..." & input$liga != "..."){
       colorib = "green"
       mensaje = "Puede enviar sus resultados"
+      iconob = icon("ok", lib = "glyphicon")
     }else if(input$nombre == "..."){
       colorib = "red"
       mensaje = "Ingresa tu nombre"
+      iconob = icon("remove", lib = "glyphicon")
     }else if(input$liga == "..."){
       colorib = "red"
       mensaje = "Selecciona una Liga"
+      iconob = icon("remove", lib = "glyphicon")
     }else{
       colorib = "red"
       mensaje = "Seleccione un equipo diferente en cada grupo"
+      iconob = icon("remove", lib = "glyphicon")
     }
     infoBox(
       HTML("Estado de tu predicción"), 
       h6(mensaje), 
-      icon = icon("cloud-upload", lib = "glyphicon"),
+      icon = iconob,
       color = colorib, 
       fill = T
     )
@@ -581,13 +585,15 @@ server <- function(input, output, session){
       valor = paste0("Jugador: ", pr3$Jugador[tolower(pr3$Codigo) == tolower(input$codigo_octavos)])
       subtitulo = paste0("Liga: ", pr3$Liga[tolower(pr3$Codigo) == tolower(input$codigo_octavos)])
       colorib = "green"
+      iconob = icon("ok", lib = "glyphicon")
     }else{
       titulo = "Código"
       valor = "incorrecto"
       subtitulo = "contáctate con el administrador"
       colorib = "red"
+      iconob = icon("remove", lib = "glyphicon")
     }
-    infoBox(titulo, valor, subtitulo, color = colorib, icon = icon("cloud-upload", lib = "glyphicon"), width = 12)
+    infoBox(titulo, valor, subtitulo, color = colorib, icon = iconob, width = 12)
   }) 
   
   observeEvent(input$pro_oct, {
@@ -610,7 +616,8 @@ server <- function(input, output, session){
       filter(fase == "o") %>% 
       replace(is.na(.), 0) %>% 
       mutate(Fecha = as.character(Fecha),
-             Fecha = gsub("2022", "22", Fecha),
+             Fecha = gsub("2022-", "", Fecha),
+             Fecha = gsub("-", "\\/", Fecha),
              Hora = gsub(" hrs", "", Hora),
              `GL (P)` = ifelse(p1 != 0, paste0(g1, " (", p1, ")"), g1),
              `GV (P)` = ifelse(p2 != 0, paste0(g2, " (", p2, ")"), g2),
@@ -626,7 +633,8 @@ server <- function(input, output, session){
         filter(fase == "c") %>% 
       replace(is.na(.), 0) %>% 
       mutate(Fecha = as.character(Fecha),
-             Fecha = gsub("2022", "22", Fecha),
+             Fecha = gsub("2022-", "", Fecha),
+             Fecha = gsub("-", "\\/", Fecha),
              Hora = gsub(" hrs", "", Hora),
              `GL (P)` = ifelse(p1 != 0, paste0(g1, " (", p1, ")"), g1),
              `GV (P)` = ifelse(p2 != 0, paste0(g2, " (", p2, ")"), g2),
@@ -642,7 +650,8 @@ server <- function(input, output, session){
       filter(fase == "s") %>% 
       replace(is.na(.), 0) %>% 
       mutate(Fecha = as.character(Fecha),
-             Fecha = gsub("2022", "22", Fecha),
+             Fecha = gsub("2022-", "", Fecha),
+             Fecha = gsub("-", "\\/", Fecha),
              Hora = gsub(" hrs", "", Hora),
              `GL (P)` = ifelse(p1 != 0, paste0(g1, " (", p1, ")"), g1),
              `GV (P)` = ifelse(p2 != 0, paste0(g2, " (", p2, ")"), g2),
@@ -658,7 +667,8 @@ server <- function(input, output, session){
       filter(fase == "t") %>% 
       replace(is.na(.), 0) %>% 
       mutate(Fecha = as.character(Fecha),
-             Fecha = gsub("2022", "22", Fecha),
+             Fecha = gsub("2022-", "", Fecha),
+             Fecha = gsub("-", "\\/", Fecha),
              Hora = gsub(" hrs", "", Hora),
              `GL (P)` = ifelse(p1 != 0, paste0(g1, " (", p1, ")"), g1),
              `GV (P)` = ifelse(p2 != 0, paste0(g2, " (", p2, ")"), g2),
@@ -673,7 +683,8 @@ server <- function(input, output, session){
       filter(fase == "f") %>% 
       replace(is.na(.), 0) %>% 
       mutate(Fecha = as.character(Fecha),
-             Fecha = gsub("2022", "22", Fecha),
+             Fecha = gsub("2022-", "", Fecha),
+             Fecha = gsub("-", "\\/", Fecha),
              Hora = gsub(" hrs", "", Hora),
              `GL (P)` = ifelse(p1 != 0, paste0(g1, " (", p1, ")"), g1),
              `GV (P)` = ifelse(p2 != 0, paste0(g2, " (", p2, ")"), g2),
