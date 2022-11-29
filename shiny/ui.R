@@ -45,10 +45,10 @@ ui <- dashboardPage(skin="black",
                                          column(width = 6,
                                                 box(title = "Mundial Qatar 2022", status = "danger", solidHeader = T, width = 12,
                                                     "Esto copiamos de Wikipedia: La Copa Mundial de Fútbol de la FIFA Catar 2022
-                                             (en árabe, كأس العالم لكرة القدم قطر 2022) será la XXII edición de la Copa Mundial de
-                                             Fútbol masculino organizada por la FIFA. Se desarrollará desde el 20 de noviembre al
-                                             18 de diciembre en Catar, que consiguió los derechos de organización el 2 de diciembre
-                                            de 2010.",
+                                           (en árabe, كأس العالم لكرة القدم قطر 2022) será la XXII edición de la Copa Mundial de
+                                           Fútbol masculino organizada por la FIFA. Se desarrollará desde el 20 de noviembre al
+                                           18 de diciembre en Catar, que consiguió los derechos de organización el 2 de diciembre
+                                          de 2010.",
                                                     br(), br(),
                                                     "PD. En Ecuador no va jugar el Kitu :(",
                                                     br()),
@@ -65,7 +65,7 @@ ui <- dashboardPage(skin="black",
                                                     "- Podrás ver los cruces de la siguiente fase de acuerdo a tu predicción.", br(),
                                                     "- Antes de enviar tus resultados deberás introducir el código asociado a tu jugador y liga de la fase de grupos.", br(),
                                                     "- Para enviar tus pronósticos da click en el botón ", strong("Envía tu pronóstico"), ".",br(),
-                                                    ),
+                                                ),
                                                 box(title = "Sistema de puntos", status = "danger", solidHeader = T, width = 12,
                                                     strong("Fase de grupos:"), br(),
                                                     "- Por cada equipo clasificado a octavos de final recibes ", strong("1 punto"), ".", br(),
@@ -76,7 +76,7 @@ ui <- dashboardPage(skin="black",
                                                     "- Además, si aciertas a la diferencia de goles recibes ", strong("1 punto extra"), ".", br(),
                                                     "- Por ultimo, si aciertas el marcador exacto recibirás ", strong("2 puntos extra"), ".", br(),
                                                     "- En el caso de que tu pronóstico sea un empate, el marcado exacto será determinado por los goles y los penales 
-                                                    decidirán el ganador de la llave.", br(),
+                                                  decidirán el ganador de la llave.", br(),
                                                     "- Los puntos ganados en semifinales y finales ", strong("valdrán el doble"), ". Es una ganga...!!!", br(),
                                                     br(),
                                                     strong("Criterios de desempate:"), br(),
@@ -198,22 +198,22 @@ ui <- dashboardPage(skin="black",
                         ),
                         tabItem("res_grupos",
                                 fluidRow(width = 12,
-                                  box(title = "Grupo A", status = "primary", solidHeader = T, width = 3,
-                                      tableOutput("g1"),  align = "center"),
-                                  box(title = "Grupo B", status = "success", solidHeader = T, width = 3,
-                                      tableOutput("g2"),  align = "center"),
-                                  box(title = "Grupo C", status = "warning", solidHeader = T, width = 3,
-                                      tableOutput("g3"),  align = "center"),
-                                  box(title = "Grupo D", status = "danger", solidHeader = T, width = 3,
-                                      tableOutput("g4"),  align = "center"),
-                                  box(title = "Grupo E", status = "primary", solidHeader = T, width = 3,
-                                      tableOutput("g5"),  align = "center"),
-                                  box(title = "Grupo F", status = "success", solidHeader = T, width = 3,
-                                      tableOutput("g6"),  align = "center"),
-                                  box(title = "Grupo G", status = "warning", solidHeader = T, width = 3,
-                                      tableOutput("g7"),  align = "center"),
-                                  box(title = "Grupo H", status = "danger", solidHeader = T, width = 3,
-                                      tableOutput("g8"),  align = "center")
+                                         box(title = "Grupo A", status = "primary", solidHeader = T, width = 3,
+                                             tableOutput("g1"),  align = "center"),
+                                         box(title = "Grupo B", status = "success", solidHeader = T, width = 3,
+                                             tableOutput("g2"),  align = "center"),
+                                         box(title = "Grupo C", status = "warning", solidHeader = T, width = 3,
+                                             tableOutput("g3"),  align = "center"),
+                                         box(title = "Grupo D", status = "danger", solidHeader = T, width = 3,
+                                             tableOutput("g4"),  align = "center"),
+                                         box(title = "Grupo E", status = "primary", solidHeader = T, width = 3,
+                                             tableOutput("g5"),  align = "center"),
+                                         box(title = "Grupo F", status = "success", solidHeader = T, width = 3,
+                                             tableOutput("g6"),  align = "center"),
+                                         box(title = "Grupo G", status = "warning", solidHeader = T, width = 3,
+                                             tableOutput("g7"),  align = "center"),
+                                         box(title = "Grupo H", status = "danger", solidHeader = T, width = 3,
+                                             tableOutput("g8"),  align = "center")
                                 )    
                         ),
                         tabItem("res_elim_directa",
@@ -256,7 +256,7 @@ ui <- dashboardPage(skin="black",
                                                               onInitialize = I('function() { this.setValue("");}'))),
                                 box(title = "Equipos más votados", status = "warning", solidHeader = T, plotOutput("bolitas")),
                                 box(title = NULL, status = "warning", solidHeader = F, "Equipos más votados: mientras más grande la bolita más gente
-                            votó por ese equipo en esa posición.")
+                          votó por ese equipo en esa posición.")
                                 
                                 
                                 
@@ -264,27 +264,27 @@ ui <- dashboardPage(skin="black",
                         tabItem("juega_octavos",
                                 tags$style(
                                   ".container {
-                            display: flex;
-                            justify-content: space-around;
-                            border-color: #666666;
-                            background-color: #fff;
-                            border-style: solid;
-                            border-width: thin;
-                            border-radius: 3px;
-                            text-align: center;
-                            margin: 14px;
-                            min-height: 48px;
-                            width: 336px;
-                            }
-                            .container-items {
-                            width: 40px;
-                            height: 34px;
-                            margin: 7px;
-                            text-align: center;
-                            font-size: 18px;
-                            vertical-align: baseline;
-                            }
-                            "
+                          display: flex;
+                          justify-content: space-around;
+                          border-color: #666666;
+                          background-color: #fff;
+                          border-style: solid;
+                          border-width: thin;
+                          border-radius: 3px;
+                          text-align: center;
+                          margin: 14px;
+                          min-height: 48px;
+                          width: 336px;
+                          }
+                          .container-items {
+                          width: 40px;
+                          height: 34px;
+                          margin: 7px;
+                          text-align: center;
+                          font-size: 18px;
+                          vertical-align: baseline;
+                          }
+                          "
                                 ),
                                 fluidRow(width = 12,
                                          column(width = 6, align = "center",
@@ -436,17 +436,10 @@ ui <- dashboardPage(skin="black",
                                                 infoBoxOutput("ib_cod_oct", width = 12)
                                                 #,
                                                 #actionButton("pro_oct", "Envía tu pronóstico")
-                                                ),
+                                         ),
                                          column(width = 1)
-                                         )
+                                )
                         )
-                        #
-                        ##### Angelito
-                        
-                        
-                        #
-                        ##### Javi
-                        
                       )
                     )
 )
