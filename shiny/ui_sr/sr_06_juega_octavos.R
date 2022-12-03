@@ -166,7 +166,7 @@ pre_octavos <- reactive({
       input$go12, input$go22, input$go32, input$go42,
       input$go52, input$go62, input$go72, input$go82)
   
-  penales1 <- rep(0, 8)
+  penales1 <- rep("0", 8)
   if(is.vector(input$qo11)){penales1[1] <- input$qo11}
   if(is.vector(input$qo21)){penales1[2] <- input$qo21}
   if(is.vector(input$qo31)){penales1[3] <- input$qo31}
@@ -176,7 +176,7 @@ pre_octavos <- reactive({
   if(is.vector(input$qo71)){penales1[7] <- input$qo71}
   if(is.vector(input$qo81)){penales1[8] <- input$qo81}
   
-  penales2 <- rep(0, 8)
+  penales2 <- rep("0", 8)
   if(is.vector(input$qo12)){penales2[1] <- input$qo12}
   if(is.vector(input$qo22)){penales2[2] <- input$qo22}
   if(is.vector(input$qo32)){penales2[3] <- input$qo32}
