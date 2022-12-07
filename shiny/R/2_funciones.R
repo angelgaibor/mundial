@@ -29,3 +29,19 @@ agrega_prediccion_octavos <- function(data_oct, gs4 = TRUE) {
   cum_data
 }
 
+# agregar prediccion cuartos
+agrega_prediccion_cuartos <- function(data_cua, gs4 = TRUE) {
+  
+  if (gs4) {
+    sheet_append(pre_cua, data_cua, "pre_cua")
+    cum_data <- read_sheet(pre_cua, "pre_cua")
+  } else {
+    old_data <- read.xlsx("data/predicciones_cuartos.xlsx", "Hoja1")
+    cum_data <- bind_rows(old_data, data_oct)
+    write.xlsx(cum_data, "data/predicciones_cuartos.xlsx", "Hoja1")
+  }
+  
+  cum_data
+}
+
+

@@ -14,10 +14,16 @@ server <- function(input, output, session){
   # reactive values
   v <- reactiveValues()
   v_o <- reactiveValues()
+  v_c <- reactiveValues()
+  v_s <- reactiveValues()
+  v_f <- reactiveValues()
   
   # Inicialización de objetos
   v$guardado <- F
   v_o$guardado <- F
+  v_c$guardado <- F
+  v_s$guardado <- F
+  v_f$guardado <- F
   
   dato <- data.frame(
     Siglas = character(0),
@@ -37,6 +43,9 @@ server <- function(input, output, session){
   # server tab: resultados eliminación directa
   source("ui_sr/sr_06_juega_octavos.R", local = T)
   
+  # server tab: puntaje
+  source("ui_sr/sr_07_juega_cuartos.R", local = T)
+  
   # server tab: resultados fase de grupos
   source("ui_sr/sr_03_res_grupos.R", local = T)
   
@@ -45,6 +54,8 @@ server <- function(input, output, session){
   
   # server tab: puntaje
   source("ui_sr/sr_05_puntaje.R", local = T)
+  
+  
   
 }
 

@@ -5,10 +5,10 @@ account: huzerpro
 server: shinyapps.io
 hostUrl: https://api.shinyapps.io/v1
 appId: 7638710
-bundleId: 6552023
+bundleId: 6583765
 url: https://huzerpro.shinyapps.io/qatar22/
-when: 1669326217.32143
-lastSyncTime: 1669326217.32145
+when: 1670016193.61146
+lastSyncTime: 1670016193.61148
 asMultiple: FALSE
 asStatic: FALSE
 ignoredFiles: info/enlaces utiles.txt|info/shiny_es.pdf|www/Magneto_Malherido.mp3

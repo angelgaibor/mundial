@@ -172,9 +172,8 @@ ui_juega_octavos <-
                           box(width = 12, tableOutput("tabla_cuartos")),
                           textInput("codigo_octavos", label = "Ingresa el código de participación", value = "",
                                     width = "168px", placeholder = "Ejemplo: 1K1u5M"),
-                          infoBoxOutput("ib_cod_oct", width = 12)
-                          # comentamos boton para no poder enviar mas resultados
-                          # actionButton("pro_oct", "Envía tu pronóstico")
+                          infoBoxOutput("ib_cod_oct", width = 12),
+                          actionButton("pro_oct", "Envía tu pronóstico")
                    ),
                    column(width = 1)
           )
