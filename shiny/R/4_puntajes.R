@@ -112,9 +112,8 @@ pr3 <- pr3 %>%
   mutate(poct = ifelse(is.na(poct), 0, poct),
          Puntaje = pgru + poct)
 
-
 #
-# puntaje octavos de final
+# puntaje cuartos de final
 puntos_cuartos <- pre_cuartos_ini %>% 
   mutate(id = paste0(equipo1, equipo2)) %>% 
   left_join(res_elim_directa %>% 
@@ -151,4 +150,43 @@ pr3 <- pr3 %>%
   left_join(puntos_cuartos, by = "Codigo") %>% 
   mutate(pcua = ifelse(is.na(pcua), 0, pcua),
          Puntaje = pgru + poct + pcua)
+
+#
+# puntaje semifinales
+puntos_semis <- pre_semis_ini %>% 
+  mutate(id = paste0(equipo1, equipo2)) %>% 
+  left_join(res_elim_directa %>% 
+              filter(fase == "s") %>% 
+              mutate(id = paste0(equipo1, equipo2),
+                     g1f = as.numeric(g1), 
+                     g2f = as.numeric(g2), 
+                     p1f = as.numeric(p1), 
+                     p2f = as.numeric(p2)) %>% 
+              select(id, g1f, g2f, p1f, p2f),
+            by = "id") %>% 
+  filter(!is.na(g1f)) %>% 
+  filter(!is.na(g1)) %>% 
+  replace(is.na(.), 0) %>% 
+  mutate(g1 = as.numeric(g1),
+         g2 = as.numeric(g2),
+         p1 = as.numeric(p1),
+         p2 = as.numeric(p2),
+         pres = case_when(sign(g1+p1 - (g2+p2)) == sign(g1f+p1f - (g2f+p2f)) ~ 1*2,
+                          T ~ 0),
+         pdif = case_when(g1 - g2 == g1f - g2f ~ 1*2,
+                          T ~ 0),
+         pexa = case_when(g1 == g1f & g2 == g2f ~ 2*2,
+                          T ~ 0),
+         psem = pres + pdif + pexa,
+         codigo = tolower(codigo)) %>% 
+  group_by(id, codigo) %>% 
+  summarise(psem = last(psem)) %>% 
+  ungroup() %>% 
+  group_by(Codigo = codigo) %>% 
+  summarise(psem = sum(psem))
+
+pr3 <- pr3 %>% 
+  left_join(puntos_semis, by = "Codigo") %>% 
+  mutate(psem = ifelse(is.na(psem), 0, psem),
+         Puntaje = pgru + poct + pcua + psem)
 

@@ -121,7 +121,7 @@ output$tabla_semis <- renderTable({
               vs =" - ") %>% 
     select(`Equipo C1` = equipo1, 
            vs,
-           `Equipos C2` = equipo2)
+           `Equipo C2` = equipo2)
 }) 
 ####
 
@@ -162,7 +162,7 @@ output$vb_conf_cua <- renderValueBox({
   mensaje <- "Envía"
   subt <- "tu pronóstico"
   colorib <- "red"
-  if(v_c$guardado == T){
+  if(v_c$guardado == T & input$codigo_cuartos != ""){
     mensaje <- "Resultado enviado"
     subt <- "ya dejen de darle click al botón :("
     colorib <- "green"

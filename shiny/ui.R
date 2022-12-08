@@ -10,8 +10,6 @@ library(tidyverse)
 library(glue)
 library(stringi)
 
-#source("R/1_global.R",local = T)
-
 source("ui_sr/ui_01_info.R", local = T)
 source("ui_sr/ui_02_juega_fase_grupos.R", local = T)
 source("ui_sr/ui_03_res_grupos.R", local = T)
@@ -19,7 +17,7 @@ source("ui_sr/ui_04_res_elim_directa.R", local = T)
 source("ui_sr/ui_05_puntaje.R", local = T)
 source("ui_sr/ui_06_juega_octavos.R", local = T)
 source("ui_sr/ui_07_juega_cuartos.R", local = T)
-# source("ui_sr/ui_08_juega_semis.R", local = T)
+source("ui_sr/ui_08_juega_semis.R", local = T)
 # source("ui_sr/ui_09_juega_final.R", local = T)
 
 # autorizacion en google sheet
@@ -37,8 +35,8 @@ ui <- dashboardPage(skin="black",
                                                           menuSubItem("¿Cómo jugar?", tabName = "info", selected = T),
                                                           menuSubItem("Fase de grupos", tabName = "juega_grupos"),
                                                           menuSubItem("Octavos de final", tabName = "juega_octavos"),
-                                                          menuSubItem("Cuartos de final", tabName = "juega_cuartos")
-                                                          # menuSubItem("Semifinales", tabName = "juega_semis"),
+                                                          menuSubItem("Cuartos de final", tabName = "juega_cuartos"),
+                                                          menuSubItem("Semifinales", tabName = "juega_semis")
                                                           # menuSubItem("Finales", tabName = "juega_final")
                                      ),
                                      menuItem("Resultados Qatar 2022",
@@ -59,8 +57,8 @@ ui <- dashboardPage(skin="black",
                         ui_res_elim_directa,
                         ui_puntaje,
                         ui_juega_octavos,
-                        ui_juega_cuartos
-                        # ui_juega_semis,
+                        ui_juega_cuartos,
+                        ui_juega_semis
                         # ui_juega_final,
                       )
                     )

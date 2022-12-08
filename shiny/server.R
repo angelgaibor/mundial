@@ -40,11 +40,14 @@ server <- function(input, output, session){
   # server tab: juega conmigo - fase de grupos
   source("ui_sr/sr_02_juega_fase_grupos.R", local = T)
   
-  # server tab: resultados eliminación directa
+  # server tab: predicciones octavos
   source("ui_sr/sr_06_juega_octavos.R", local = T)
   
-  # server tab: puntaje
+  # server tab: predicciones cuartos
   source("ui_sr/sr_07_juega_cuartos.R", local = T)
+  
+  # server tab: predicciones semis
+  source("ui_sr/sr_08_juega_semis.R", local = T)
   
   # server tab: resultados fase de grupos
   source("ui_sr/sr_03_res_grupos.R", local = T)

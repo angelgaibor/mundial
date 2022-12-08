@@ -114,7 +114,7 @@ ui_juega_cuartos <-
                                     width = "168px", placeholder = "Ejemplo: 1K1u5M"),
                           infoBoxOutput("ib_cod_cua", width = 12),
                           actionButton("pro_cua", "Envía tu pronóstico"),
-                          br(),
+                          br(), br(),
                           valueBoxOutput("vb_conf_cua", width = 12)
                    ),
                    column(width = 1)
