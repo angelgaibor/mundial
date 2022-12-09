@@ -192,3 +192,39 @@ pr3 <- pr3 %>%
 
 #
 # puntaje tercer lugar y final
+puntos_final <- pre_final_ini %>% 
+  mutate(id = paste0(equipo1, equipo2)) %>% 
+  left_join(res_elim_directa %>% 
+              filter(fase == "t" | fase == "f") %>% 
+              mutate(id = paste0(equipo1, equipo2),
+                     g1f = as.numeric(g1), 
+                     g2f = as.numeric(g2), 
+                     p1f = as.numeric(p1), 
+                     p2f = as.numeric(p2)) %>% 
+              select(id, g1f, g2f, p1f, p2f),
+            by = "id") %>% 
+  filter(!is.na(g1f)) %>% 
+  filter(!is.na(g1)) %>% 
+  replace(is.na(.), 0) %>% 
+  mutate(g1 = as.numeric(g1),
+         g2 = as.numeric(g2),
+         p1 = as.numeric(p1),
+         p2 = as.numeric(p2),
+         pres = case_when(sign(g1+p1 - (g2+p2)) == sign(g1f+p1f - (g2f+p2f)) ~ 1*2,
+                          T ~ 0),
+         pdif = case_when(g1 - g2 == g1f - g2f ~ 1*2,
+                          T ~ 0),
+         pexa = case_when(g1 == g1f & g2 == g2f ~ 2*2,
+                          T ~ 0),
+         pfin = pres + pdif + pexa,
+         codigo = tolower(codigo)) %>% 
+  group_by(id, codigo) %>% 
+  summarise(pfin = last(pfin)) %>% 
+  ungroup() %>% 
+  group_by(Codigo = codigo) %>% 
+  summarise(pfin = sum(pfin))
+
+pr3 <- pr3 %>% 
+  left_join(puntos_final, by = "Codigo") %>% 
+  mutate(pfin = ifelse(is.na(pfin), 0, pfin),
+         Puntaje = pgru + poct + pcua + psem + pfin)

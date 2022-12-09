@@ -138,6 +138,7 @@ output$ib_cod_fin <- renderInfoBox({
 observeEvent(input$pro_fin, {
   v_f$guardado <- T
   pre_final_f <- pre_final() %>%
+    bind_rows(pre_tercero()) %>% 
     mutate(codigo = input$codigo_final) %>% 
     select(equipo1, equipo2,	g1,	g2,	p1,	p2,	codigo) %>% 
     ungroup() %>% 
