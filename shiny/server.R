@@ -49,6 +49,9 @@ server <- function(input, output, session){
   # server tab: predicciones semis
   source("ui_sr/sr_08_juega_semis.R", local = T)
   
+  # server tab: predicciones semis
+  source("ui_sr/sr_09_juega_final.R", local = T)
+  
   # server tab: resultados fase de grupos
   source("ui_sr/sr_03_res_grupos.R", local = T)
   

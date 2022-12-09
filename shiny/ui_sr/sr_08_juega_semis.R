@@ -61,21 +61,29 @@ pre_semis <- reactive({
     g2 = c(input$gs12, input$gs22),
     p1 = penales1,
     p2 = penales2,
-    final = c(1, 2)
+    final = c(1, 1)
   )
 })
 
 output$tabla_final <- renderTable({
-  pre_semis() %>% 
+  final <- pre_semis() %>% 
     mutate(clasificado = case_when(g1 > g2 ~ equipo1,
-                                   g1 < g2 ~ equipo2,
-                                   p1 > p2 ~ equipo1,
-                                   p1 < p2 ~ equipo2,
-                                   T ~ "Error en su marcador")) %>% 
-    group_by(final) %>%
-    summarise(equipo1 = first(clasificado),
-              equipo2 = last(clasificado), 
-              vs =" - ") %>% 
+                                 g1 < g2 ~ equipo2,
+                                 p1 > p2 ~ equipo1,
+                                 p1 < p2 ~ equipo2,
+                                 T ~ "Error en su marcador"),
+           tercero = case_when(g1 > g2 ~ equipo2,
+                                   g1 < g2 ~ equipo1,
+                                   p1 > p2 ~ equipo2,
+                                   p1 < p2 ~ equipo1,
+                                   T ~ "Error en su marcador"))
+  
+  final1 <- data.frame(
+    Partido = c("Final", "Tercer puesto"),
+    equipo1 = c(final$clasificado[1], final$tercero[1]),
+    vs =" - ",
+    equipo2 = c(final$clasificado[2], final$tercero[2])
+  ) %>% 
     select(`Equipo C1` = equipo1, 
            vs,
            `Equipo C2` = equipo2)

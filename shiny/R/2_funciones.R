@@ -58,3 +58,18 @@ agrega_prediccion_semis <- function(data_sem, gs4 = TRUE) {
   
   cum_data
 }
+
+# agregar prediccion final
+agrega_prediccion_final <- function(data_fin, gs4 = TRUE) {
+  
+  if (gs4) {
+    sheet_append(pre_fin, data_fin, "pre_cua")
+    cum_data <- read_sheet(pre_fin, "pre_cua")
+  } else {
+    old_data <- read.xlsx("data/predicciones_final.xlsx", "Hoja1")
+    cum_data <- bind_rows(old_data, data_oct)
+    write.xlsx(cum_data, "data/predicciones_final.xlsx", "Hoja1")
+  }
+  
+  cum_data
+}

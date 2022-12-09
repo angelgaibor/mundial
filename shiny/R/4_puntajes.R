@@ -190,3 +190,5 @@ pr3 <- pr3 %>%
   mutate(psem = ifelse(is.na(psem), 0, psem),
          Puntaje = pgru + poct + pcua + psem)
 
+#
+# puntaje tercer lugar y final
