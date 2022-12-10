@@ -98,7 +98,7 @@ ui_juega_fase_grupos <-
           fluidRow(align = "center",
                    column(width = 4, ""),
                    column(width = 4, infoBoxOutput("ib_res_con", width = 12),
-                          actionButton("pronostico", "Envía tu pronóstico"),
+                          # actionButton("pronostico", "Envía tu pronóstico"),
                           br(), br(),
                           valueBoxOutput("ib_env_res", width = 12)
                    ),

@@ -35,9 +35,9 @@ ui <- dashboardPage(skin="black",
                                                           menuSubItem("¿Cómo jugar?", tabName = "info", selected = T),
                                                           menuSubItem("Fase de grupos", tabName = "juega_grupos"),
                                                           menuSubItem("Octavos de final", tabName = "juega_octavos"),
-                                                          menuSubItem("Cuartos de final", tabName = "juega_cuartos"),
-                                                          menuSubItem("Semifinales", tabName = "juega_semis"),
-                                                          menuSubItem("Finales", tabName = "juega_final")
+                                                          menuSubItem("Cuartos de final", tabName = "juega_cuartos")
+                                                          # menuSubItem("Semifinales", tabName = "juega_semis"),
+                                                          # menuSubItem("Finales", tabName = "juega_final")
                                      ),
                                      menuItem("Resultados Qatar 2022",
                                               icon = icon("tasks", lib = "glyphicon"),
