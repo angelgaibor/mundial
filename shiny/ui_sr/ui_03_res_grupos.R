@@ -1,7 +1,7 @@
 #
 ui_res_grupos <-
   tabItem("res_grupos",
-          fluidRow(width = 12,
+          fluidRow(width = 12, align = "center",
                    box(title = "Grupo A", status = "primary", solidHeader = T, width = 3,
                        tableOutput("g1"),  align = "center"),
                    box(title = "Grupo B", status = "success", solidHeader = T, width = 3,

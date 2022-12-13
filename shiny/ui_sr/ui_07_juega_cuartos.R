@@ -113,7 +113,7 @@ ui_juega_cuartos <-
                           textInput("codigo_cuartos", label = "Ingresa el código de participación", value = "",
                                     width = "168px", placeholder = "Ejemplo: 1K1u5M"),
                           infoBoxOutput("ib_cod_cua", width = 12),
-                          actionButton("pro_cua", "Envía tu pronóstico"),
+                          # actionButton("pro_cua", "Envía tu pronóstico"),
                           br(), br(),
                           valueBoxOutput("vb_conf_cua", width = 12)
                    ),

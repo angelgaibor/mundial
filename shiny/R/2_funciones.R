@@ -48,8 +48,8 @@ agrega_prediccion_cuartos <- function(data_cua, gs4 = TRUE) {
 agrega_prediccion_semis <- function(data_sem, gs4 = TRUE) {
   
   if (gs4) {
-    sheet_append(pre_sem, data_sem, "pre_cua")
-    cum_data <- read_sheet(pre_sem, "pre_cua")
+    sheet_append(pre_sem, data_sem, "pre_sem")
+    cum_data <- read_sheet(pre_sem, "pre_sem")
   } else {
     old_data <- read.xlsx("data/predicciones_semis.xlsx", "Hoja1")
     cum_data <- bind_rows(old_data, data_oct)
