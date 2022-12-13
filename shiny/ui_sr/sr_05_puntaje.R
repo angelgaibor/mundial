@@ -85,10 +85,10 @@ output$gra_jug_pun <- renderPlot({
   li %>% 
     select(-Codigo, -puntos1, -Liga, -Puntaje) %>% 
     pivot_longer(!Jugador, names_to = "Fase", values_to = "freq") %>% 
-    mutate(Fase = factor(Fase, levels = c("pcua", "poct", "pgru"), labels = c("pcua", "poct", "pgru"))) %>% 
+    mutate(Fase = factor(Fase, levels = c("psem", "pcua", "poct", "pgru"), labels = c("psem", "pcua", "poct", "pgru"))) %>% 
     ggplot(aes(y = Jugador, x = freq, fill = Fase)) +
     geom_bar(stat = "identity") +
-    scale_fill_manual(values = c("#3CAEA3", "#20639B", "#173F5F")) +
+    scale_fill_manual(values = c("#F6D55C", "#3CAEA3", "#20639B", "#173F5F")) +
     theme(panel.background = element_blank(),
           panel.grid.minor = element_blank(),
           panel.grid.major.y = element_blank(),
