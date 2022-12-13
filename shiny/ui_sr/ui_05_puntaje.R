@@ -6,7 +6,7 @@ ui_puntaje <-
                          options = list(placeholder = "...", 
                                         onInitialize = I('function() { this.setValue("");}'))),
           box(title = "Puntaje por jugador", status = "danger", solidHeader = T, plotOutput("gra_jug_pun")),
-          box(title = NULL, status = "danger", solidHeader = F, "Puntaje (oscuro a claro): Fase de grupos - Octavos de final -
+          box(title = NULL, status = "danger", solidHeader = F, "Puntaje (izqquierda a derecha): Fase de grupos - Octavos de final -
                      Cuartos de final - Semifinal - Final"),
           selectizeInput("jugador1", label = NULL, choices = "",
                          multiple = F,
