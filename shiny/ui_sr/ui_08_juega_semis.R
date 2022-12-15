@@ -83,7 +83,7 @@ ui_juega_semis <-
                           textInput("codigo_semis", label = "Ingresa el código de participación", value = "",
                                     width = "168px", placeholder = "Ejemplo: 1K1u5M"),
                           infoBoxOutput("ib_cod_sem", width = 12),
-                          actionButton("pro_sem", "Envía tu pronóstico"),
+                          # actionButton("pro_sem", "Envía tu pronóstico"),
                           br(), br(),
                           valueBoxOutput("vb_conf_sem", width = 12)
                    ),
