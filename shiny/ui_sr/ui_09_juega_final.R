@@ -101,7 +101,7 @@ ui_juega_final <-
                           textInput("codigo_final", label = "Ingresa el código de participación", value = "",
                                     width = "168px", placeholder = "Ejemplo: 1K1u5M"),
                           infoBoxOutput("ib_cod_fin", width = 12),
-                          actionButton("pro_fin", "Envía tu pronóstico"),
+                          # actionButton("pro_fin", "Envía tu pronóstico"),
                           br(), br(),
                           valueBoxOutput("vb_conf_fin", width = 12)
                    ),
