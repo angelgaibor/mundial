@@ -1,3 +1,6 @@
+R and Git:
+https://rfortherestofus.com/2021/02/how-to-use-git-github-with-r/
+
 Shiny Dashboard:
 https://rstudio.github.io/shinydashboard/structure.html
 
