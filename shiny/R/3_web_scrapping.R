@@ -22,6 +22,17 @@ posiciones <- do.call(rbind, lolo) %>%
   select(Grupo, Pos, Equipo, Pts, PJ, PG, PE, PP, GF, GC, Dif) %>% 
   ungroup()
 
+#
+# preparacion para output de tablas de cada grupo
+posiciones1  <- posiciones %>% 
+  left_join(equipos, by = c("Equipo", "Grupo")) %>%
+  ungroup() %>% 
+  mutate(`G-E-P` = paste0(PG,"-",PE,"-", PP),
+         `GF(Dif)` = paste0(GF, "(", Dif, ")")) %>% 
+  select(-Equipo) %>% 
+  rename(Equipo = Siglas) %>% 
+  select(Grupo, Pos, Equipo, Pts, PJ,`G-E-P`,  `GF(Dif)`)
+
 rm(fifa, dim_t, lolo)
 
 

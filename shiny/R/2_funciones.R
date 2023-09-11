@@ -29,3 +29,47 @@ agrega_prediccion_octavos <- function(data_oct, gs4 = TRUE) {
   cum_data
 }
 
+# agregar prediccion cuartos
+agrega_prediccion_cuartos <- function(data_cua, gs4 = TRUE) {
+  
+  if (gs4) {
+    sheet_append(pre_cua, data_cua, "pre_cua")
+    cum_data <- read_sheet(pre_cua, "pre_cua")
+  } else {
+    old_data <- read.xlsx("data/predicciones_cuartos.xlsx", "Hoja1")
+    cum_data <- bind_rows(old_data, data_oct)
+    write.xlsx(cum_data, "data/predicciones_cuartos.xlsx", "Hoja1")
+  }
+  
+  cum_data
+}
+
+# agregar prediccion semis
+agrega_prediccion_semis <- function(data_sem, gs4 = TRUE) {
+  
+  if (gs4) {
+    sheet_append(pre_sem, data_sem, "pre_sem")
+    cum_data <- read_sheet(pre_sem, "pre_sem")
+  } else {
+    old_data <- read.xlsx("data/predicciones_semis.xlsx", "Hoja1")
+    cum_data <- bind_rows(old_data, data_oct)
+    write.xlsx(cum_data, "data/predicciones_semis.xlsx", "Hoja1")
+  }
+  
+  cum_data
+}
+
+# agregar prediccion final
+agrega_prediccion_final <- function(data_fin, gs4 = TRUE) {
+  
+  if (gs4) {
+    sheet_append(pre_fin, data_fin, "pre_fin")
+    cum_data <- read_sheet(pre_fin, "pre_fin")
+  } else {
+    old_data <- read.xlsx("data/predicciones_final.xlsx", "Hoja1")
+    cum_data <- bind_rows(old_data, data_oct)
+    write.xlsx(cum_data, "data/predicciones_final.xlsx", "Hoja1")
+  }
+  
+  cum_data
+}
